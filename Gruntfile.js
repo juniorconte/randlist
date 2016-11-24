@@ -220,7 +220,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -477,7 +477,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'newer:jscs',
-    'test',
+  //'test',
     'build'
   ]);
 };

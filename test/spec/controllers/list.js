@@ -17,7 +17,4 @@ describe('Controller: ListCtrl', function () {
     });
   }));
 
-  xit('should attach a list of awesomeThings to the scope', function () {
-    expect(ListCtrl.awesomeThings.length).toBe(3);
-  });
 });
