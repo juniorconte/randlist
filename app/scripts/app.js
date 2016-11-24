@@ -10,9 +10,7 @@
  */
 angular
   .module('randlistApp', [
-    'ngAnimate',
-    'ngRoute',
-    'ngSanitize'
+    'ngRoute'
   ])
   .config(function ($routeProvider) {
     $routeProvider
