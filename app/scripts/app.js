@@ -16,7 +16,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/list', {
         templateUrl: 'views/list.html',
         controller: 'ListCtrl',
         controllerAs: 'list'
@@ -27,6 +27,6 @@ angular
         controllerAs: 'sweepstakes'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/list'
       });
   });
