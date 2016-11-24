@@ -21,6 +21,10 @@ angular
         controller: 'ListCtrl',
         controllerAs: 'list'
       })
+      .when('/sweepstakes', {
+        templateUrl: 'views/sweepstakes.html',
+        controller: 'SweepstakesCtrl',
+        controllerAs: 'sweepstakes'
       })
       .otherwise({
         redirectTo: '/'
