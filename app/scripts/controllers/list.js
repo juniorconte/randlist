@@ -12,10 +12,23 @@ angular.module('randlistApp')
 
     var list = this;
 
-    list.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    list.head = [];
+    list.body = [];
+
+    list.proccess = function(csv) {
+      var table = csv
+        .split('\n')
+        .map(function(row) {
+          return row.split(',');
+        })
+        .filter(function(row) {
+          return row.some(function(collum) {
+            return !!collum;
+          });
+        });
+
+      list.head = table.shift();
+      list.body = table;
+    };
 
   });

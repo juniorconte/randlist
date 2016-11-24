@@ -1,1 +1,27 @@
-<p>This is the list view.</p>
+<form>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th ng-repeat="collum in list.head">
+          {{collum}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in list.body">
+        <td ng-repeat="cell in row">
+          {{cell}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-group">
+    <div class="btn btn-primary fake-upload">
+      Carregar arquivo csv
+      <input type="file"
+        accept=".csv, application/vnd.ms-excel"
+        on-read-file="list.proccess($fileContent)">
+    </div>
+  </div>
+</form>
