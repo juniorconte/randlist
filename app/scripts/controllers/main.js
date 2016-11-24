@@ -8,10 +8,12 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($rootScope) {
+
+    var main = this;
+
+    $rootScope.$on('$routeChangeStart', function(event, next) {
+      main.currentControllerAs = next.controllerAs;
+    });
+
   });

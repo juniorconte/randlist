@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: ListCtrl', function () {
 
   // load the controller's module
   beforeEach(module('randlistApp'));
 
-  var MainCtrl,
+  var ListCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    ListCtrl = $controller('ListCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   xit('should attach a list of awesomeThings to the scope', function () {
-    expect(MainCtrl.awesomeThings.length).toBe(3);
+    expect(ListCtrl.awesomeThings.length).toBe(3);
   });
 });
