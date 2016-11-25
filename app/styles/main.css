@@ -20,6 +20,11 @@ table thead {
   top: 0px;
 }
 
+.expression {
+  font-family: Courier;
+  color: #428bca;
+}
+
 #fork {
   position: absolute;
   top: 0;

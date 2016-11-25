@@ -8,13 +8,15 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('SweepstakesCtrl', function (localStorageService) {
+  .controller('SweepstakesCtrl', function ($scope, $window,
+    localStorageService) {
 
     var sweepstakes = this;
 
     function load() {
       sweepstakes.head = localStorageService.get('head') || [];
       sweepstakes.list = localStorageService.get('body') || [];
+      sweepstakes.filter = localStorageService.get('filter') || null;
       sweepstakes.makeWinnerList();
     }
 
@@ -22,7 +24,17 @@ angular.module('randlistApp')
 
     sweepstakes.run = function() {
       var candidates = sweepstakes.list.filter(function(candidate) {
-        return !candidate.control.win;
+        if (sweepstakes.filter) {
+          var sandbox = $scope.$new();
+
+          sweepstakes.head.data.forEach(function(collum, index) {
+            sandbox[collum] = angular.copy(candidate.data[index]);
+          });
+
+          return !candidate.control.win && sandbox.$eval(sweepstakes.filter);
+        } else {
+          return !candidate.control.win;
+        }
       });
 
       if (candidates.length > 0) {
@@ -35,6 +47,8 @@ angular.module('randlistApp')
 
         localStorageService.set('body', sweepstakes.list);
         load();
+      } else {
+        $window.alert('Não há mais candidatos disponíveis');
       }
     };
 
@@ -42,6 +56,10 @@ angular.module('randlistApp')
       sweepstakes.winners = sweepstakes.list.filter(function(candidate) {
         return candidate.control.win;
       });
+    };
+
+    sweepstakes.saveFilter = function(value) {
+      localStorageService.set('filter', value);
     };
 
     load();
