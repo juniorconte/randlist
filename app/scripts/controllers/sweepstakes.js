@@ -10,7 +10,13 @@
 angular.module('randlistApp')
   .controller('SweepstakesCtrl', function (localStorageService) {
 
-    var load, sweepstakes = this;
+    var sweepstakes = this;
+
+    function load() {
+      sweepstakes.head = localStorageService.get('head') || [];
+      sweepstakes.list = localStorageService.get('body') || [];
+      sweepstakes.makeWinnerList();
+    }
 
     sweepstakes.winners = [];
 
@@ -38,10 +44,6 @@ angular.module('randlistApp')
       });
     };
 
-    (load = function () {
-      sweepstakes.head = localStorageService.get('head') || [];
-      sweepstakes.list = localStorageService.get('body') || [];
-      sweepstakes.makeWinnerList();
-    })();
+    load();
 
   });

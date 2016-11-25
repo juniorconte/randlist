@@ -10,7 +10,12 @@
 angular.module('randlistApp')
   .controller('ListCtrl', function ($window, localStorageService) {
 
-    var load, list = this;
+    var list = this;
+
+    function load() {
+      list.head = localStorageService.get('head') || [];
+      list.body = localStorageService.get('body') || [];
+    }
 
     list.proccess = function proccess(csv) {
       var table = csv
@@ -47,9 +52,6 @@ angular.module('randlistApp')
       }
     };
 
-    (load = function() {
-      list.head = localStorageService.get('head') || [];
-      list.body = localStorageService.get('body') || [];
-    })();
+    load();
 
   });
