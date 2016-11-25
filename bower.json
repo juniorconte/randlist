@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "^1.4.0",
     "bootstrap": "^3.2.0",
+    "angular-i18n": "^1.4.0",
     "angular-route": "^1.4.0",
     "angular-local-storage": "^0.5.2"
   },
@@ -18,6 +19,11 @@
         "less/bootstrap.less",
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
+      ]
+    },
+    "angular-i18n": {
+      "main": [
+        "angular-locale_pt-br.js"
       ]
     }
   }
