@@ -8,14 +8,11 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('ListCtrl', function ($window) {
+  .controller('ListCtrl', function ($window, localStorageService) {
 
     var list = this;
 
-    list.head = [];
-    list.body = [];
-
-    list.proccess = function(csv) {
+    list.proccess = function proccess(csv) {
       var table = csv
         .split('\n')
         .map(function(row) {
@@ -29,13 +26,23 @@ angular.module('randlistApp')
 
       list.head = table.shift();
       list.body = table;
+
+      localStorageService.set('head', list.head);
+      localStorageService.set('body', list.body);
     };
 
-    list.clean = function() {
+    list.clean = function clean() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
         list.head = [];
         list.body = [];
+
+        localStorageService.clearAll();
       }
     };
+
+    (function load() {
+      list.head = localStorageService.get('head') || [];
+      list.body = localStorageService.get('body') || [];
+    })();
 
   });

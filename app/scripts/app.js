@@ -10,7 +10,8 @@
  */
 angular
   .module('randlistApp', [
-    'ngRoute'
+    'ngRoute',
+    'LocalStorageModule'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,4 +28,9 @@ angular
       .otherwise({
         redirectTo: '/list'
       });
+  })
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('randlist')
+      .setStorageType('localStorage');
   });
