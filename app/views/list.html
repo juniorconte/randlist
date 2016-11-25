@@ -16,12 +16,18 @@
     </tbody>
   </table>
 
-  <div class="form-group">
-    <div class="btn btn-primary fake-upload">
+  <div class="form-group" ng-switch="list.body.length == 0">
+    <div ng-switch-when="true"
+      class="btn btn-primary fake-upload">
       Carregar arquivo csv
       <input type="file"
         accept=".csv, application/vnd.ms-excel"
         on-read-file="list.proccess($fileContent)">
     </div>
+    <button ng-switch-when="false"
+      class="btn btn-danger"
+      ng-click="list.clean()">
+      Limpar lista
+    </button>
   </div>
 </form>

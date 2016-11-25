@@ -8,7 +8,7 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('ListCtrl', function () {
+  .controller('ListCtrl', function ($window) {
 
     var list = this;
 
@@ -29,6 +29,13 @@ angular.module('randlistApp')
 
       list.head = table.shift();
       list.body = table;
+    };
+
+    list.clean = function() {
+      if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
+        list.head = [];
+        list.body = [];
+      }
     };
 
   });
