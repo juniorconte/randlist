@@ -2,13 +2,15 @@ body {
   padding-top: 70px;
 }
 
+table thead {
+  text-transform: capitalize;
+}
+
 .fake-upload {
   position: relative;
 }
 
 .fake-upload input[type="file"] {
-  line-height: 12px;
-  background-color: #DDD;
   position: absolute;
   cursor: pointer;
   width: 100%;

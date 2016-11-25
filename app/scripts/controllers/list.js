@@ -10,37 +10,44 @@
 angular.module('randlistApp')
   .controller('ListCtrl', function ($window, localStorageService) {
 
-    var list = this;
+    var load, list = this;
 
     list.proccess = function proccess(csv) {
       var table = csv
         .split('\n')
-        .map(function(row) {
-          return row.split(',');
+        .map(function(row, index) {
+          var content = {
+            data: row.split(','),
+            control: {}
+          };
+
+          if (!!content.data.toString() && index) {
+            content.control.index = index;
+            content.control.win = false;
+            content.control.winAt = null;
+          }
+
+          return content;
         })
         .filter(function(row) {
-          return row.some(function(collum) {
+          return row.data.some(function(collum) {
             return !!collum;
           });
         });
 
-      list.head = table.shift();
-      list.body = table;
-
-      localStorageService.set('head', list.head);
-      localStorageService.set('body', list.body);
+      localStorageService.set('head', table.shift());
+      localStorageService.set('body', table);
+      load();
     };
 
     list.clean = function clean() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
-        list.head = [];
-        list.body = [];
-
         localStorageService.clearAll();
+        load();
       }
     };
 
-    (function load() {
+    (load = function() {
       list.head = localStorageService.get('head') || [];
       list.body = localStorageService.get('body') || [];
     })();
