@@ -1,1 +1,39 @@
-<p>This is the sweepstakes view.</p>
+<form>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th ng-repeat="collum in sweepstakes.head.data">
+          {{::collum}}
+        </th>
+        <th>
+          Sorteio
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in sweepstakes.winners | orderBy:'control.winAt'">
+        <td>
+          {{::$index+1}}º
+        </td>
+        <td ng-repeat="cell in row.data">
+          {{::cell}}
+        </td>
+        <td>
+          {{::row.control.winAt | date:'short'}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-group">
+    <button type="button"
+      class="btn btn-primary"
+      ng-click="sweepstakes.run()"
+      ng-disabled="sweepstakes.list.length == 0 || sweepstakes.winners.length == sweepstakes.list.length">
+      Sortear
+    </button>
+  </div>
+</form>
