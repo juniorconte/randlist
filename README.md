@@ -2,6 +2,8 @@
 
 Webapp para realização de sorteios com listas, filtros e blacklist
 
+**[Live demo](https://randlist.aerobatic.io)**
+
 ## Contribute
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular) version 0.15.1.
