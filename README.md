@@ -15,3 +15,12 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+## Roadmap
+
+- Realizar cobertura de testes
+- Suportar .csv com dados tabulados e separados por ;
+- Implementar form de cadastro de registros avulsos
+- Criar filtro para selecionar as colunas do .csv que devem ser utilizadas na lista
+- Criar manifesto "PWA" e configurar worker para funcionamento off-line
+- Criar camada de persistencia online com Firebase
