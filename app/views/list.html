@@ -17,19 +17,22 @@
     </tbody>
   </table>
 
-  <div class="form-group" ng-switch="list.body.length == 0">
-    <div ng-switch-when="true"
-      class="btn btn-primary fake-upload">
-      Carregar arquivo csv
-      <input type="file"
-        accept=".csv, application/vnd.ms-excel"
-        on-read-file="list.proccess($fileContent)">
+  <div class="preproccess" ng-show="!list.body || list.body.length == 0">
+    <div class="form-group">
+      <div class="btn btn-primary fake-upload">
+        Carregar arquivo csv
+        <input type="file" accept=".csv, application/vnd.ms-excel" on-read-file="list.preproccess($fileContent)">
+      </div>
     </div>
-    <button ng-switch-when="false"
-      type="button"
-      class="btn btn-danger"
-      ng-click="list.clean()">
-      Limpar lista
-    </button>
+    <div class="form-inline" ng-show="list.csv && list.csv.length > 0">
+      <div class="form-group">
+        <label for="sep">Separador de colunas</label>
+        <input id="sep" class="form-control" size="4" maxlength="1" value="," />
+      </div>
+      <button type="button" class="btn btn-success" ng-click="list.proccess()">OK</button>
+    </div>
+  </div>
+  <div class="form-group" ng-show="list.body && list.body.length > 0">
+    <button type="button" class="btn btn-danger" ng-click="list.clean()">Limpar lista</button>
   </div>
 </form>
