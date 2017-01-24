@@ -12,17 +12,22 @@ angular.module('randlistApp')
 
     var list = this;
 
+	  list.csv = null
+
     function load() {
       list.head = localStorageService.get('head') || [];
       list.body = localStorageService.get('body') || [];
     }
 
+    list.preproccess = function (csv) {
+      list.csv = csv
+    }
+
     list.proccess = function proccess(csv) {
-      var table = csv
-        .split('\n')
-        .map(function(row, index) {
+      var sep = $('#sep').val()
+      var table = list.csv.split('\n').map(function(row, index) {
           var content = {
-            data: row.split(','),
+            data: row.split(sep),
             control: {}
           };
 
@@ -47,6 +52,7 @@ angular.module('randlistApp')
 
     list.clean = function clean() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
+        list.csv = undefined
         localStorageService.clearAll();
         load();
       }
