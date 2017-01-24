@@ -1,38 +1,51 @@
-<form>
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th ng-repeat="collum in list.head.data">
-          {{::collum}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in list.body"
-        ng-class="{'success':row.control.win}">
-        <td ng-repeat="cell in row.data">
-          {{::cell}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="preproccess" ng-show="!list.body || list.body.length == 0">
+<form class="form-horizontal">
+  <div ng-show="!list.body || list.body.length == 0">
     <div class="form-group">
-      <div class="btn btn-primary fake-upload">
-        Carregar arquivo csv
-        <input type="file" accept=".csv, application/vnd.ms-excel" on-read-file="list.preproccess($fileContent)">
+      <label for="separator" class="col-sm-2 control-label">Separador</label>
+      <div class="col-sm-1">
+        <input type="text"
+          id="separator"
+          class="form-control"
+          ng-model="separator"
+          placeholder=","
+          maxlength="1">
       </div>
     </div>
-    <div class="form-inline" ng-show="list.csv && list.csv.length > 0">
-      <div class="form-group">
-        <label for="sep">Separador de colunas</label>
-        <input id="sep" class="form-control" size="4" maxlength="1" value="," />
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <div class="btn btn-primary fake-upload">
+          Carregar arquivo csv
+          <input type="file"
+            accept=".csv, application/vnd.ms-excel"
+            on-read-file="list.proccess($fileContent, separator)">
+        </div>
       </div>
-      <button type="button" class="btn btn-success" ng-click="list.proccess()">OK</button>
     </div>
-  </div>
-  <div class="form-group" ng-show="list.body && list.body.length > 0">
-    <button type="button" class="btn btn-danger" ng-click="list.clean()">Limpar lista</button>
   </div>
 </form>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th ng-repeat="collum in list.head.data">
+        {{::collum}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in list.body"
+      ng-class="{'success':row.control.win}">
+      <td ng-repeat="cell in row.data">
+        {{::cell}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-group" ng-show="list.body && list.body.length > 0">
+  <button type="button"
+    class="btn btn-danger"
+    ng-click="list.clean()">
+    Limpar lista
+  </button>
+</div>
