@@ -51,7 +51,7 @@ angular.module('randlistApp')
 
     list.add = function(newer) {
       list.body.push({
-        data: newer,
+        data: Object.values(newer),
         control: {
           win: false,
           winAt: null
