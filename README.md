@@ -25,7 +25,7 @@ Este projeto foi iniciado a partir do [yo angular generator](https://github.com/
 
 - Realizar cobertura de testes
 - ~~Suportar .csv com dados tabulados e separados por ;~~
-- Implementar form de cadastro de registros avulsos
+- ~~Implementar form de cadastro de registros avulsos~~
 - Criar filtro para selecionar as colunas do .csv que devem ser utilizadas na lista
 - Criar identidade visual e site para tornar o projeto mais acessível para os organizadores de eventos
 - Criar manifesto "PWA" e configurar worker para funcionamento off-line

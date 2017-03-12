@@ -25,7 +25,6 @@ angular.module('randlistApp')
         };
 
         if (!!content.data.toString() && index) {
-          content.control.index = index;
           content.control.win = false;
           content.control.winAt = null;
         }
@@ -43,10 +42,29 @@ angular.module('randlistApp')
       load();
     };
 
-    list.clean = function clean() {
+    list.clean = function() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
         localStorageService.clearAll();
         load();
+      }
+    };
+
+    list.add = function(newer) {
+      list.body.push({
+        data: newer,
+        control: {
+          win: false,
+          winAt: null
+        }
+      });
+
+      localStorageService.set('body', list.body);
+    };
+
+    list.remove = function(candidate) {
+      if ($window.confirm('Isso apagará este registro, deseja continuar?')) {
+        list.body.splice(list.body.indexOf(candidate), true);
+        localStorageService.set('body', list.body);
       }
     };
 

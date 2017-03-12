@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-4">
-        <div class="btn btn-primary fake-upload">
+        <div class="btn btn-lg btn-primary fake-upload">
           Carregar arquivo csv
           <input type="file"
             accept=".csv, application/vnd.ms-excel"
@@ -24,28 +24,57 @@
   </div>
 </form>
 
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th ng-repeat="collum in list.head.data">
-        {{::collum}}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="row in list.body"
-      ng-class="{'success':row.control.win}">
-      <td ng-repeat="cell in row.data">
-        {{::cell}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<form ng-init="newer = {}"
+  ng-submit="list.add(newer); newer = {}"
+  ng-show="list.body && list.body.length > 0">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th ng-repeat="collum in list.head.data">
+          {{::collum}}
+        </th>
+        <th width="20"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in list.body"
+        class="animate-repeat"
+        ng-class="{'success':row.control.win}">
+        <td ng-repeat="cell in row.data">
+          {{::cell}}
+        </td>
+        <td>
+          <button type="button"
+            class="btn btn-danger btn-sm"
+            ng-click="list.remove(row)"
+            ng-disabled="row.control.win">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td ng-repeat="collum in list.head.data">
+          <input type="text"
+            class="form-control input-sm"
+            placeholder="{{::collum}}"
+            ng-model="newer[collum]"
+            required>
+        </td>
+        <td>
+          <button type="submit"
+            class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="form-group" ng-show="list.body && list.body.length > 0">
-  <button type="button"
-    class="btn btn-danger"
-    ng-click="list.clean()">
-    Limpar lista
-  </button>
-</div>
+  <div class="form-group">
+    <button type="button"
+      class="btn btn-lg btn-danger"
+      ng-click="list.clean()">
+      Limpar lista
+    </button>
+  </div>
+</form>

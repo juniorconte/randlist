@@ -2,6 +2,10 @@ body {
   padding-top: 70px;
 }
 
+table {
+  font-size: 19px;
+}
+
 table thead {
   text-transform: capitalize;
 }
@@ -23,11 +27,4 @@ table thead {
 .expression {
   font-family: Courier;
   color: #428bca;
-}
-
-#fork {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 9999;
 }
