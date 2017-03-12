@@ -11,6 +11,7 @@
 angular
   .module('randlistApp', [
     'ngRoute',
+    'ngAnimate',
     'LocalStorageModule'
   ])
   .config(function ($routeProvider) {
