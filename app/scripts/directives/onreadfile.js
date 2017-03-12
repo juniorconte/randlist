@@ -26,6 +26,8 @@ angular.module('randlistApp')
           reader
             .readAsText((onChangeEvent.srcElement || onChangeEvent.target)
             .files[0]);
+
+          element.val(undefined);
         });
       }
     };
