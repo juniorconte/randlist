@@ -62,6 +62,10 @@ angular.module('randlistApp')
       localStorageService.set('filter', value);
     };
 
+    sweepstakes.print = function() {
+      $window.print();
+    };
+
     load();
 
   });
