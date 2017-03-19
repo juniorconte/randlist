@@ -22,15 +22,12 @@ angular.module('randlistApp')
       }
     }
 
-    function makeObjects(item, i) {
+    function makeObjects(item) {
       breackWithoutHeadOrBody();
 
       var objetc = {};
       item.data.forEach(function(data, i) {
-        console.log('fire', arguments);
-        angular.extend(objetc, {
-          [list.head.data[i]]: data
-        });
+        objetc[list.head.data[i]] = data;
       });
 
       return objetc;
