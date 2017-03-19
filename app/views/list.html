@@ -51,5 +51,10 @@
       ng-disabled="!list.body || !list.body.length">
       Limpar lista
     </button>
+    <button type="button"
+      class="btn btn-lg btn-primary"
+      ng-click="list.save(list.head, list.body)">
+      Exportar lista
+    </button>
   </div>
 </form>
