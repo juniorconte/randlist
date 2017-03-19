@@ -98,7 +98,7 @@ angular.module('randlistApp')
       fileRandList.list = list.body
         .map(makeObjects);
 
-      exportList.save('', angular.toJson(fileRandList));
+      exportList.save('cadastro', angular.toJson(fileRandList));
     };
 
     load();
