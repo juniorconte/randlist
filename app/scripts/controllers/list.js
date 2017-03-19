@@ -17,10 +17,15 @@ angular.module('randlistApp')
       list.body = localStorageService.get('body') || [];
     }
 
+
+    function cleanString(string) {
+      return string.trim().replace('\r', '');
+    }
+
     list.proccess = function(csv, separator) {
       var table = csv.split('\n').map(function(row, index) {
         var content = {
-          data: row.split(separator || ','),
+          data: row.split(separator || ',').map(cleanString),
           control: {}
         };
 
