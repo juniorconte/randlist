@@ -1,3 +1,41 @@
+<form class="form-horizontal">
+  <div ng-show="!list.body || list.body.length == 0">
+    <div class="form-group">
+      <label for="separator" class="col-sm-2 control-label">Separador</label>
+      <div class="col-sm-1">
+        <input type="text"
+          id="separator"
+          class="form-control"
+          ng-model="separator"
+          placeholder=","
+          maxlength="1">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <div class="btn btn-lg btn-primary fake-upload">
+          <i class="glyphicon glyphicon-open"></i>
+          Carregar arquivo csv
+          <input type="file"
+            accept=".csv, application/vnd.ms-excel"
+            on-read-file="list.proccess($fileContent, separator)">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <div class="btn btn-lg btn-primary fake-upload">
+          <i class="glyphicon glyphicon-open"></i>
+          Carregar backup do randlist
+          <input type="file"
+            accept=".randlist"
+            on-read-file="list.import($fileContent)">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
 <form ng-init="newer = {}"
   ng-submit="list.add(newer); newer = {}">
   <table class="table table-striped table-hover"
@@ -49,12 +87,14 @@
       class="btn btn-lg btn-danger"
       ng-click="list.clean()"
       ng-disabled="!list.body || !list.body.length">
+      <i class="glyphicon glyphicon-trash"></i>
       Limpar lista
     </button>
     <button type="button"
       class="btn btn-lg btn-primary"
-      ng-click="list.save(list.head, list.body)">
-      Exportar lista
+      ng-click="list.save()">
+      <i class="glyphicon glyphicon-save"></i>
+      Gerar backup
     </button>
   </div>
 </form>

@@ -16,21 +16,8 @@ angular.module('randlistApp')
       list.body = localStorageService.get('body') || [];
     }
 
-    function breackWithoutHeadOrBody() {
-      if (!list.head.data.lenght || !list.body.data.lenght) {
-        return;
-      }
-    }
-
-    function makeObjects(item) {
-      breackWithoutHeadOrBody();
-
-      var objetc = {};
-      item.data.forEach(function(data, i) {
-        objetc[list.head.data[i]] = data;
-      });
-
-      return objetc;
+    function fileIsValid(file) {
+      return 'head' in file && 'body' in file && 'filter' in file;
     }
 
     function cleanString(string) {
@@ -89,16 +76,30 @@ angular.module('randlistApp')
     };
 
     list.save = function() {
-      breackWithoutHeadOrBody();
+      // Realiza um break na função
+      if (!list.head.data.length || !list.body.length) {
+        console.log(list.head, list.body);
+        return;
+      }
 
       var fileRandList = {
-        list: []
+        head: localStorageService.get('head') || {},
+        body: localStorageService.get('body') || [],
+        filter: localStorageService.get('filter') || ''
       };
 
-      fileRandList.list = list.body
-        .map(makeObjects);
+      exportList.save('backup.randlist', angular.toJson(fileRandList));
+    };
 
-      exportList.save('cadastro', angular.toJson(fileRandList));
+    list.import = function(fileRandList) {
+      var parsedJson = angular.fromJson(fileRandList);
+
+      if (parsedJson !== undefined && fileIsValid(parsedJson)) {
+        localStorageService.set('head', parsedJson.head);
+        localStorageService.set('body', parsedJson.body);
+        localStorageService.set('filter', parsedJson.filter);
+        load();
+      }
     };
 
     load();
