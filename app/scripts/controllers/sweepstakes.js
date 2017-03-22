@@ -11,14 +11,14 @@ angular.module('randlistApp')
   .controller('SweepstakesCtrl', function ($scope, $window,
     localStorageService) {
 
-    var sweepstakes = this;
-
     function load() {
       sweepstakes.head = localStorageService.get('head') || [];
       sweepstakes.list = localStorageService.get('body') || [];
       sweepstakes.filter = localStorageService.get('filter') || null;
       sweepstakes.makeWinnerList();
     }
+
+    var sweepstakes = this;
 
     sweepstakes.winners = [];
 
@@ -27,7 +27,7 @@ angular.module('randlistApp')
         if (sweepstakes.filter) {
           var sandbox = $scope.$new();
 
-          sweepstakes.head.data.forEach(function(collum, index) {
+          sweepstakes.head.forEach(function(collum, index) {
             sandbox[collum] = angular.copy(candidate.data[index]);
           });
 

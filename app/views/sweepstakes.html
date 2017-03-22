@@ -6,7 +6,7 @@
         <th>
           #
         </th>
-        <th ng-repeat="collum in sweepstakes.head.data">
+        <th ng-repeat="collum in sweepstakes.head">
           {{::collum}}
         </th>
         <th>
@@ -52,7 +52,7 @@
 
     <p class="help-block">
       Utilize valores disponíveis no candidato como:
-      <strong>{{sweepstakes.head.data.join(', ')}}</strong>
+      <strong>{{sweepstakes.head.join(', ')}}</strong>
     </p>
 
   </div>

@@ -4,7 +4,7 @@
     ng-show="list.body && list.body.length > 0">
     <thead>
       <tr>
-        <th ng-repeat="collum in list.head.data">
+        <th ng-repeat="collum in list.head">
           {{::collum}}
         </th>
         <th width="20"></th>
@@ -27,7 +27,7 @@
         </td>
       </tr>
       <tr>
-        <td ng-repeat="collum in list.head.data">
+        <td ng-repeat="collum in list.head">
           <input type="text"
             class="form-control input-sm"
             placeholder="{{::collum}}"

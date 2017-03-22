@@ -10,12 +10,12 @@
 angular.module('randlistApp')
   .controller('ListCtrl', function ($window, localStorageService) {
 
-    var list = this;
-
     function load() {
       list.head = localStorageService.get('head') || [];
       list.body = localStorageService.get('body') || [];
     }
+
+    var list = this;
 
     list.clean = function() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {

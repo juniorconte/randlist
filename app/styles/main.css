@@ -28,3 +28,7 @@ table thead {
   font-family: Courier;
   color: #428bca;
 }
+
+.ignored {
+  color: #AAA;
+}

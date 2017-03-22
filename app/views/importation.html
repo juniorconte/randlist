@@ -1,23 +1,86 @@
 <form class="form-horizontal">
   <div class="form-group">
-    <label for="separator" class="col-sm-2 control-label">Separador</label>
-    <div class="col-sm-1">
-      <input type="text"
-        id="separator"
-        class="form-control"
-        ng-model="separator"
-        placeholder=","
-        maxlength="1">
-    </div>
-  </div>
-  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-4">
-      <div class="btn btn-lg btn-primary fake-upload">
+      <div class="btn btn-primary btn-lg fake-upload">
         Carregar arquivo csv
         <input type="file"
-          accept=".csv, application/vnd.ms-excel"
-          on-read-file="importation.proccess($fileContent, separator)">
+          accept=".txt, .dat, .csv, application/vnd.ms-excel"
+          on-read-file="importation.loadFile($fileContent)">
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <label for="separator" class="col-sm-2 control-label">Separador</label>
+    <div class="col-sm-2">
+      <input type="text"
+        id="separator"
+        class="form-control"
+        ng-model="importation.separator"
+        maxlength="2">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="separator" class="col-sm-2 control-label">Cabeçalho?</label>
+    <div class="col-sm-2">
+      <input type="checkbox" ng-model="importation.firstIsHead">
+    </div>
+  </div>
 </form>
+
+<hr ng-show="importation.table.body.length">
+
+<table class="table" ng-show="importation.table.body.length">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th ng-repeat="collum in importation.table.head track by $index"
+        ng-init="preserve = true">
+        <div class="input-group">
+          <input type="text"
+            ng-model="collum"
+            class="form-control input-sm"
+            placeholder="atributo"
+            ng-disabled="!preserve"
+            required>
+          <span class="input-group-addon">
+            <input type="checkbox"
+              ng-model="preserve"
+              ng-change="importation.toggleCollum($index)">
+          </span>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody ng-init="limit = 8">
+    <tr ng-repeat="rows in importation.table.body | limitTo:limit">
+      <td><strong>{{$index+1}}</strong></td>
+      <td ng-repeat="cell in rows track by $index"
+        ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+        {{::cell}}
+      </td>
+    </tr>
+    <tr ng-if="importation.table.body.length > limit">
+      <td colspan="{{importation.table.head.length+1}}">...</td>
+    </tr>
+    <tr ng-if="importation.table.body.length > limit">
+      <td><strong>{{importation.table.body.length}}</strong></td>
+      <td ng-repeat="cell in importation.table.body[importation.table.body.length-1] track by $index"
+        ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+        {{::cell}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-4">
+    <button type="button"
+      class="btn btn-primary btn-lg"
+      ng-click="importation.proccess(importation.table, importation.ignored)"
+      ng-disabled="!importation.table.body.length">
+      Processar lista
+    </button>
+  </div>
+</div>
