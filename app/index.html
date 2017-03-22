@@ -35,6 +35,9 @@
             </div>
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
               <ul class="nav navbar-nav">
+                <li ng-class="{'active':main.currentControllerAs == 'importation'}">
+                  <a ng-href="#/importation">Importar</a>
+                </li>
                 <li ng-class="{'active':main.currentControllerAs == 'list'}">
                   <a ng-href="#/list">Lista</a>
                 </li>
@@ -71,10 +74,13 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+
+    <script src="scripts/directives/onreadfile.js"></script>
+
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/importation.js"></script>
     <script src="scripts/controllers/list.js"></script>
     <script src="scripts/controllers/sweepstakes.js"></script>
-    <script src="scripts/directives/onreadfile.js"></script>
     <!-- endbuild -->
 
     <script>

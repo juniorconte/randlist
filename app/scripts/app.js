@@ -16,6 +16,11 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/importation', {
+        templateUrl: 'views/importation.html',
+        controller: 'ImportationCtrl',
+        controllerAs: 'importation'
+      })
       .when('/list', {
         templateUrl: 'views/list.html',
         controller: 'ListCtrl',

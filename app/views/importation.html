@@ -1,0 +1,23 @@
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="separator" class="col-sm-2 control-label">Separador</label>
+    <div class="col-sm-1">
+      <input type="text"
+        id="separator"
+        class="form-control"
+        ng-model="separator"
+        placeholder=","
+        maxlength="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <div class="btn btn-lg btn-primary fake-upload">
+        Carregar arquivo csv
+        <input type="file"
+          accept=".csv, application/vnd.ms-excel"
+          on-read-file="importation.proccess($fileContent, separator)">
+      </div>
+    </div>
+  </div>
+</form>
