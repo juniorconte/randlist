@@ -88,11 +88,15 @@ angular.module('randlistApp')
         filter: localStorageService.get('filter') || ''
       };
 
-      exportList.save('backup.randlist', angular.toJson(fileRandList));
+      var toJson = angular.toJson(fileRandList);
+      var base64 = btoa(toJson);
+
+      exportList.save('backup.randlist', base64);
     };
 
-    list.import = function(fileRandList) {
-      var parsedJson = angular.fromJson(fileRandList);
+    list.import = function(fileRandListBase64) {
+      var unBase64 = atob(fileRandListBase64);
+      var parsedJson = angular.fromJson(unBase64);
 
       if (parsedJson !== undefined && fileIsValid(parsedJson)) {
         localStorageService.set('head', parsedJson.head);
