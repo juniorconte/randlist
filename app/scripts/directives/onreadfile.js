@@ -16,6 +16,7 @@ angular.module('randlistApp')
 
         element.on('change', function(onChangeEvent) {
           var reader = new FileReader();
+          var changeEvent = angular.copy(onChangeEvent);
 
           reader.onload = function(onLoadEvent) {
             scope.$apply(function() {
@@ -24,7 +25,7 @@ angular.module('randlistApp')
           };
 
           reader
-            .readAsText((onChangeEvent.srcElement || onChangeEvent.target)
+            .readAsText((changeEvent.srcElement || changeEvent.target)
             .files[0]);
 
           element.val(undefined);
