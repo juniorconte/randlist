@@ -15,8 +15,6 @@ Webapp para realização de sorteios com listas, filtros e blacklist
 
 ## Contribua com o projeto
 
-**[Confira nosso Board no Trello](https://trello.com/b/4GZ8SdTF/randlist-io)**
-
 Baixe o repositório localmente, execute `npm install` e `bower install` para baixar todas as dependências.
 
 Execute `grunt build` para gerar o pacote e `grunt serve` para rodar um servidor localmente.
@@ -24,3 +22,19 @@ Execute `grunt build` para gerar o pacote e `grunt serve` para rodar um servidor
 Execute `grunt test` para executar os testes unitários utilianzando o Karma.
 
 Este projeto foi iniciado a partir do [yo angular generator](https://github.com/yeoman/generator-angular) versão 0.15.1.
+
+# Prefixos de commit
+
+FIX: O que foi corrigido
+ADD: O que foi adicionado
+DEL: O que foi removido
+CHG: O que foi modificado
+RFC: O que foi refatorado
+AMD: Mensagem do commit original (continuação)
+MRG: Branch "mergido" ao branch do commit em questão
+
+# Board de desenvolvimento
+
+Utilizamos o Trello para manter o fluxo de desenvolvimento, visite o Board para acompanhar a funcionalidades do Road Map, Bug  fixes, Changelog, etc.
+
+**[Confira nosso Board no Trello](https://trello.com/b/4GZ8SdTF/randlist-io)**
