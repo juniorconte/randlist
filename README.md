@@ -25,13 +25,19 @@ Este projeto foi iniciado a partir do [yo angular generator](https://github.com/
 
 # Prefixos de commit
 
-FIX: O que foi corrigido
-ADD: O que foi adicionado
-DEL: O que foi removido
-CHG: O que foi modificado
-RFC: O que foi refatorado
-AMD: Mensagem do commit original (continuação)
-MRG: Branch "mergido" ao branch do commit em questão
+**FIX**: O que foi corrigido
+
+**ADD**: O que foi adicionado
+
+**DEL**: O que foi removido
+
+**CHG**: O que foi modificado
+
+**RFC**: O que foi refatorado
+
+**AMD**: Mensagem do commit original
+
+**MRG**: Branch "mergido" ao branch do commit em questão
 
 # Board de desenvolvimento
 
