@@ -19,23 +19,16 @@ angular.module('randlistApp')
 
     function makeCSV(head, body) {
       if (head.length && body.length) {
-        head.push('sorteio');
-
-        var array = body.map(function(row) {
-          var newRow = row.data;
-          newRow.push(row.control.winAt);
-          return newRow;
+        var rows = body.map(function(row) {
+          return row.data.concat(row.control.winAt);
         });
 
-        array.unshift(head);
+        head.push('sorteio');
+        rows.unshift(head);
 
-        array = array.map(function(row) {
-          return row.join(';');
-        })
-        .join('\n');
-
-        return array;
-
+        return rows.map(function(row) {
+          return row.join(',');
+        }).join('\n');
       }
     }
 

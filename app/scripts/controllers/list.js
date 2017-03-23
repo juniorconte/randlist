@@ -44,10 +44,7 @@ angular.module('randlistApp')
     };
 
     list.save = function() {
-      // Realiza um break na função
-      if (!list.head.length || !list.body.length) {
-        return;
-      }
+      if (!list.head.length || !list.body.length) { return; }
 
       var fileRandList = {
         head: localStorageService.get('head') || {},
