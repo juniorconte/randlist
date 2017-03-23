@@ -89,25 +89,20 @@ angular.module('randlistApp')
 
     importation.proccess = function(table, ignored) {
       var body = table.body.map(function(row) {
-        var content = {
+        return {
           data: row.map(cleanString).filter(function(cell, index) {
             return ignored.indexOf(index) === -1;
           }),
-          control: {}
+          control: {
+            win: false,
+            winAt: null
+          }
         };
-
-        if (!!content.data.toString()) {
-          content.control.win = false;
-          content.control.winAt = null;
-        }
-
-        return content;
       });
 
       var head = table.head.filter(function(collum, index) {
         return ignored.indexOf(index) === -1;
-      })
-      .map(cleanString);
+      }).map(cleanString);
 
       localStorageService.set('head', head);
       localStorageService.set('body', body);
