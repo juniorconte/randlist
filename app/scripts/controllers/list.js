@@ -9,45 +9,13 @@
  */
 angular.module('randlistApp')
   .controller('ListCtrl', function ($window, localStorageService, exportList) {
-    var list = this;
 
     function load() {
       list.head = localStorageService.get('head') || [];
       list.body = localStorageService.get('body') || [];
     }
 
-    function fileIsValid(file) {
-      return 'head' in file && 'body' in file && 'filter' in file;
-    }
-
-    function cleanString(string) {
-      return string.trim().replace('\r', '');
-    }
-
-    list.proccess = function(csv, separator) {
-      var table = csv.split('\n').map(function(row, index) {
-        var content = {
-          data: row.split(separator || ',').map(cleanString),
-          control: {}
-        };
-
-        if (!!content.data.toString() && index) {
-          content.control.win = false;
-          content.control.winAt = null;
-        }
-
-        return content;
-      })
-      .filter(function(row) {
-        return row.data.some(function(collum) {
-          return !!collum;
-        });
-      });
-
-      localStorageService.set('head', table.shift());
-      localStorageService.set('body', table);
-      load();
-    };
+    var list = this;
 
     list.clean = function() {
       if ($window.confirm('Isso apagará toda a lista, deseja continuar?')) {
@@ -77,8 +45,7 @@ angular.module('randlistApp')
 
     list.save = function() {
       // Realiza um break na função
-      if (!list.head.data.length || !list.body.length) {
-        console.log(list.head, list.body);
+      if (!list.head.length || !list.body.length) {
         return;
       }
 
@@ -92,18 +59,6 @@ angular.module('randlistApp')
       var base64 = btoa(toJson);
 
       exportList.save('backup.randlist', base64);
-    };
-
-    list.import = function(fileRandListBase64) {
-      var unBase64 = atob(fileRandListBase64);
-      var parsedJson = angular.fromJson(unBase64);
-
-      if (parsedJson !== undefined && fileIsValid(parsedJson)) {
-        localStorageService.set('head', parsedJson.head);
-        localStorageService.set('body', parsedJson.body);
-        localStorageService.set('filter', parsedJson.filter);
-        load();
-      }
     };
 
     load();

@@ -10,6 +10,16 @@
     </div>
   </div>
   <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <div class="btn btn-lg btn-primary fake-upload">
+        Carregar backup do randlist
+        <input type="file"
+          accept=".randlist"
+          on-read-file="importation.loadBackup($fileContent)">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="separator" class="col-sm-2 control-label">Separador</label>
     <div class="col-sm-2">
       <input type="text"

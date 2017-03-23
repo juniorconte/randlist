@@ -21,6 +21,10 @@ angular.module('randlistApp')
       if (csv.indexOf('|') > -1) { return '|'; }
     }
 
+    function fileIsValid(file) {
+      return 'head' in file && 'body' in file && 'filter' in file;
+    }
+
     var importation = this;
 
     importation.file = null;
@@ -96,6 +100,18 @@ angular.module('randlistApp')
       localStorageService.set('body', body);
 
       $location.path('/list');
+    };
+
+    importation.loadBackup = function(fileRandListBase64) {
+      var unBase64 = atob(fileRandListBase64);
+      var parsedJson = angular.fromJson(unBase64);
+
+      if (parsedJson !== undefined && fileIsValid(parsedJson)) {
+        localStorageService.set('head', parsedJson.head);
+        localStorageService.set('body', parsedJson.body);
+        localStorageService.set('filter', parsedJson.filter);
+        $location.path('/list');
+      }
     };
 
     $scope.$watchGroup([
