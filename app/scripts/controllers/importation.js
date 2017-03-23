@@ -94,7 +94,8 @@ angular.module('randlistApp')
 
       var head = table.head.filter(function(collum, index) {
         return ignored.indexOf(index) === -1;
-      });
+      })
+      .map(cleanString);
 
       localStorageService.set('head', head);
       localStorageService.set('body', body);
