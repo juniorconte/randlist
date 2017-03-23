@@ -8,14 +8,35 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('SweepstakesCtrl', function ($scope, $window,
-    localStorageService) {
+  .controller('SweepstakesCtrl', function ($scope, $window, exportList, localStorageService) {
 
     function load() {
       sweepstakes.head = localStorageService.get('head') || [];
       sweepstakes.list = localStorageService.get('body') || [];
       sweepstakes.filter = localStorageService.get('filter') || null;
       sweepstakes.makeWinnerList();
+    }
+
+    function makeCSV(head, body) {
+      if (head.length && body.length) {
+        head.push('sorteio');
+
+        var array = body.map(function(row) {
+          var newRow = row.data;
+          newRow.push(row.control.winAt);
+          return newRow;
+        });
+
+        array.unshift(head);
+
+        array = array.map(function(row) {
+          return row.join(';');
+        })
+        .join('\n');
+
+        return array;
+
+      }
     }
 
     var sweepstakes = this;
@@ -64,6 +85,15 @@ angular.module('randlistApp')
 
     sweepstakes.print = function() {
       $window.print();
+    };
+
+    sweepstakes.exportCSV = function(head, body) {
+      if (head.length && body.length) {
+        var copyHead = angular.copy(head);
+        var copyBody = angular.copy(body);
+        var csv = makeCSV(copyHead, copyBody);
+        exportList.save('sorteados.csv', csv);
+      }
     };
 
     load();

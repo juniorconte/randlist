@@ -71,5 +71,12 @@
       ng-disabled="sweepstakes.list.length == 0 || sweepstakes.winners.length == 0">
       Imprimir
     </button>
+
+    <button type="button"
+      class="btn btn-lg btn-default"
+      ng-click="sweepstakes.exportCSV(sweepstakes.head, sweepstakes.winners);"
+      ng-disabled="!sweepstakes.winners.length">
+      Exportar csv
+    </button>
   </div>
 </form>
