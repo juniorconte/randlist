@@ -43,15 +43,22 @@
   <thead>
     <tr>
       <th>#</th>
-      <th ng-repeat="collum in importation.table.head track by $index"
+      <th ng-repeat="collum in importation.table.head"
         ng-init="preserve = true">
         <div class="input-group">
           <input type="text"
-            ng-model="collum"
             class="form-control input-sm"
             placeholder="atributo"
+            ng-model="collum"
+            ng-change="importation.table.head[$index] = collum"
             ng-disabled="!preserve"
-            required>
+            ng-model-options="{
+              updateOn: 'default blur',
+              debounce: {
+                'default': 1000,
+                'blur': 0
+              }
+            }">
           <span class="input-group-addon">
             <input type="checkbox"
               ng-model="preserve"
