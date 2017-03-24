@@ -43,7 +43,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th ng-repeat="collum in importation.table.head"
+      <th ng-repeat="collum in importation.table.head track by $index"
         ng-init="preserve = true">
         <div class="input-group">
           <input type="text"
