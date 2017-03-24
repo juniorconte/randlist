@@ -4,7 +4,7 @@
     ng-show="list.body && list.body.length > 0">
     <thead>
       <tr>
-        <th ng-repeat="collum in list.head">
+        <th ng-repeat="collum in list.head track by $index">
           {{::collum}}
         </th>
         <th width="20"></th>
@@ -14,7 +14,7 @@
       <tr ng-repeat="row in list.body as result"
         class="animate-repeat"
         ng-class="{'success':row.control.win}">
-        <td ng-repeat="cell in row.data">
+        <td ng-repeat="cell in row.data track by $index">
           {{::cell}}
         </td>
         <td>
