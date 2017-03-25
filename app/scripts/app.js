@@ -33,7 +33,7 @@ angular
         controllerAs: 'sweepstakes'
       })
       .otherwise({
-        redirectTo: '/list'
+        redirectTo: '/sweepstakes'
       });
   })
   .config(function (localStorageServiceProvider) {
