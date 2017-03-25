@@ -31,6 +31,11 @@ table thead {
 
 .ignored {
   color: #AAA;
+}
+
+span.btn {
+  cursor: default;
+}
 
 @media print {
   body {

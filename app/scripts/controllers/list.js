@@ -49,7 +49,7 @@ angular.module('randlistApp')
       var fileRandList = {
         head: localStorageService.get('head') || {},
         body: localStorageService.get('body') || [],
-        filter: localStorageService.get('filter') || ''
+        sweepstakes: localStorageService.get('sweepstakes') || []
       };
 
       var toJson = angular.toJson(fileRandList);

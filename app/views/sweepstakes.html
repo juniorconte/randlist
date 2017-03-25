@@ -1,82 +1,126 @@
-<form>
-  <table class="table table-striped table-hover"
-    ng-if="sweepstakes.winners.length > 0">
-    <thead>
-      <tr>
-        <th>
-          #
-        </th>
-        <th ng-repeat="collum in sweepstakes.head track by $index">
-          {{::collum}}
-        </th>
-        <th>
-          Sorteio
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in sweepstakes.winners | orderBy:'control.winAt'">
-        <td>
-          {{::$index+1}}º
-        </td>
-        <td ng-repeat="cell in row.data track by $index">
-          {{::cell}}
-        </td>
-        <td>
-          {{::row.control.winAt | date:'short'}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th width="110">Quantidade</th>
+      <th width="40"></th>
+      <th>
+        Filtro
+        <i class="glyphicon glyphicon-info-sign"
+          title="Valores disponíveis: {{sweepstakes.head.join(', ')}}
 
-  <div class="form-group hidden-print">
-    <label for="filter">
-      Expressão para filtro
-    </label>
+Ex: {{sweepstakes.head[0]}} != 'alguma coisa'
 
-    <div class="input-group">
-      <input type="text"
-        ng-model="sweepstakes.filter"
-        ng-change="sweepstakes.saveFilter(sweepstakes.filter)"
-        class="form-control expression"
-        id="filter"
-        placeholder="Escreva uma condição para realizar filtros nos candidatos do sorteio">
-      <span class="input-group-btn">
+É possível utilizar todos os operadores logícos, bem como métodos nativos do prototype.">
+        </i>
+      </th>
+      <th width="90"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="sweepstake in sweepstakes.list"
+      ng-init="executed = sweepstakes.executed(sweepstake.uuid)">
+      <td>
+        <input type="text"
+          class="form-control input-sm expression"
+          placeholder="O que será sorteado?"
+          ng-model="sweepstake.name"
+          ng-change="sweepstakes.save(sweepstake)"
+          ng-model-options="{
+            updateOn: 'default blur',
+            debounce: {
+              'default': 1000,
+              'blur': 0
+            }
+          }">
+      </td>
+      <td>
+        <input type="number"
+          class="form-control input-sm expression"
+          placeholder="Quantos?"
+          min="1"
+          ng-model="sweepstake.quantity"
+          ng-change="sweepstakes.save(sweepstake)"
+          ng-model-options="{
+            updateOn: 'default blur',
+            debounce: {
+              'default': 1000,
+              'blur': 0
+            }
+          }">
+      </td>
+      <td>
+        <span class="btn btn-success btn-block btn-sm"
+          ng-class="{
+            'btn-success': (executed < sweepstake.quantity),
+            'btn-warning': (executed == sweepstake.quantity),
+            'btn-danger': (executed > sweepstake.quantity)
+          }">
+          {{executed}}
+        </span>
+      </td>
+      <td>
+        <input type="text"
+          class="form-control input-sm expression"
+          placeholder="Utilize JS se quiser filtrar :)"
+          ng-model="sweepstake.filter"
+          ng-change="sweepstakes.save(sweepstake)"
+          ng-model-options="{
+            updateOn: 'default blur',
+            debounce: {
+              'default': 1000,
+              'blur': 0
+            }
+          }">
+      </td>
+      <td>
+        <a class="btn btn-primary btn-sm"
+          ng-href="#/sweepstakes/{{sweepstake.uuid}}">
+          <i class="glyphicon glyphicon-list"></i>
+        </a>
         <button type="button"
-          ng-click="sweepstakes.filter = null; sweepstakes.saveFilter(sweepstakes.filter)"
-          class="btn btn-default">
-          <i class="glyphicon glyphicon-trash"></i>
+          class="btn btn-danger btn-sm"
+          ng-click="sweepstakes.remove(row)"
+          ng-disabled="executed">
+          <i class="glyphicon glyphicon-remove"></i>
         </button>
-      </span>
-    </div>
-
-    <p class="help-block">
-      Utilize valores disponíveis no candidato como:
-      <strong>{{sweepstakes.head.join(', ')}}</strong>
-    </p>
-
-  </div>
-
-  <div class="form-group hidden-print">
-    <button type="button"
-      class="btn btn-lg btn-primary"
-      ng-click="sweepstakes.run()"
-      ng-disabled="sweepstakes.list.length == 0 || sweepstakes.winners.length == sweepstakes.list.length">
-      Sortear
-    </button>
-
-    <button type="button"
-      class="btn btn-lg btn-default"
-      ng-click="sweepstakes.print()"
-      ng-disabled="sweepstakes.list.length == 0 || sweepstakes.winners.length == 0">
-      Imprimir
-    </button>
-
-    <button type="button"
-      class="btn btn-lg btn-default"
-      ng-click="sweepstakes.exportCSV(sweepstakes.head, sweepstakes.winners);"
-      ng-disabled="!sweepstakes.winners.length">
-      Exportar csv
-    </button>
-  </div>
-</form>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="text"
+          class="form-control input-sm expression"
+          placeholder="O que será sorteado?"
+          ng-model="name">
+      </td>
+      <td>
+        <input type="number"
+          class="form-control input-sm expression"
+          placeholder="Quantos?"
+          ng-model="quantity">
+      </td>
+      <td>
+        <span class="btn btn-default btn-block btn-sm">0</span>
+      </td>
+      <td>
+        <input type="text"
+          class="form-control input-sm expression"
+          placeholder="Utilize JS se quiser filtrar :)"
+          ng-model="filter">
+      </td>
+      <td>
+        <button type="button"
+          class="btn btn-success btn-sm"
+          ng-click="sweepstakes.add(name, quantity, filter);
+            name = quantity = filter = null">
+          <i class="glyphicon glyphicon-ok"></i>
+        </button>
+        <button type="button"
+          class="btn btn-danger btn-sm"
+          disabled>
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

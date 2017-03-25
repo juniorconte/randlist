@@ -22,7 +22,7 @@ angular.module('randlistApp')
     }
 
     function fileIsValid(file) {
-      return 'head' in file && 'body' in file && 'filter' in file;
+      return 'head' in file && 'body' in file && 'sweepstakes' in file;
     }
 
     var importation = this;
@@ -48,7 +48,7 @@ angular.module('randlistApp')
       if (parsedJson !== undefined && fileIsValid(parsedJson)) {
         localStorageService.set('head', parsedJson.head);
         localStorageService.set('body', parsedJson.body);
-        localStorageService.set('filter', parsedJson.filter);
+        localStorageService.set('sweepstakes', parsedJson.sweepstakes);
         $location.path('/list');
       }
     };
@@ -95,7 +95,8 @@ angular.module('randlistApp')
           }),
           control: {
             win: false,
-            winAt: null
+            winAt: null,
+            winFrom: null
           }
         };
       });

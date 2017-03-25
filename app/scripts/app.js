@@ -32,6 +32,11 @@ angular
         controller: 'SweepstakesCtrl',
         controllerAs: 'sweepstakes'
       })
+      .when('/sweepstakes/:uuid', {
+        templateUrl: 'views/sweepstake.html',
+        controller: 'SweepstakeCtrl',
+        controllerAs: 'sweepstake'
+      })
       .otherwise({
         redirectTo: '/sweepstakes'
       });

@@ -8,85 +8,45 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('SweepstakesCtrl', function ($scope, $window, exportList, localStorageService) {
+  .controller('SweepstakesCtrl', function ($scope, $window, localStorageService, uuid) {
 
     function load() {
       sweepstakes.head = localStorageService.get('head') || [];
-      sweepstakes.list = localStorageService.get('body') || [];
-      sweepstakes.filter = localStorageService.get('filter') || null;
-      sweepstakes.makeWinnerList();
-    }
-
-    function makeCSV(head, body) {
-      if (head.length && body.length) {
-        var rows = body.map(function(row) {
-          return row.data.concat(row.control.winAt);
-        });
-
-        head.push('sorteio');
-        rows.unshift(head);
-
-        return rows.map(function(row) {
-          return row.join(',');
-        }).join('\n');
-      }
+      sweepstakes.body = localStorageService.get('body') || [];
+      sweepstakes.list = localStorageService.get('sweepstakes') || [];
     }
 
     var sweepstakes = this;
 
-    sweepstakes.winners = [];
-
-    sweepstakes.run = function() {
-      var candidates = sweepstakes.list.filter(function(candidate) {
-        if (sweepstakes.filter) {
-          var sandbox = $scope.$new();
-
-          sweepstakes.head.forEach(function(collum, index) {
-            sandbox[collum] = angular.copy(candidate.data[index]);
-          });
-
-          return !candidate.control.win && sandbox.$eval(sweepstakes.filter);
-        } else {
-          return !candidate.control.win;
-        }
+    sweepstakes.add = function(name, quantity, filter) {
+      sweepstakes.list.push({
+        uuid: uuid.generate(),
+        name: name,
+        filter: filter,
+        quantity: quantity
       });
 
-      if (candidates.length > 0) {
-        var random = Math.floor(Math.random() * candidates.length);
-        var winner = candidates[random];
-        var index = sweepstakes.list.indexOf(winner);
+      localStorageService.set('sweepstakes', sweepstakes.list);
+    };
 
-        sweepstakes.list[index].control.win = true;
-        sweepstakes.list[index].control.winAt = new Date();
-
-        localStorageService.set('body', sweepstakes.list);
-        load();
-      } else {
-        $window.alert('Não há mais candidatos disponíveis');
+    sweepstakes.remove = function(sweepstake) {
+      if ($window.confirm('Isso apagará este registro, deseja continuar?')) {
+        sweepstakes.list.splice(sweepstakes.list.indexOf(sweepstake), true);
+        localStorageService.set('sweepstakes', sweepstakes.list);
       }
     };
 
-    sweepstakes.makeWinnerList = function() {
-      sweepstakes.winners = sweepstakes.list.filter(function(candidate) {
-        return candidate.control.win;
-      });
+    sweepstakes.save = function(sweepstake) {
+      var index = sweepstakes.list.indexOf(sweepstake);
+      sweepstakes.list[index] = sweepstake;
+
+      localStorageService.set('sweepstakes', sweepstakes.list);
     };
 
-    sweepstakes.saveFilter = function(value) {
-      localStorageService.set('filter', value);
-    };
-
-    sweepstakes.print = function() {
-      $window.print();
-    };
-
-    sweepstakes.exportCSV = function(head, body) {
-      if (head.length && body.length) {
-        var copyHead = angular.copy(head);
-        var copyBody = angular.copy(body);
-        var csv = makeCSV(copyHead, copyBody);
-        exportList.save('sorteados.csv', csv);
-      }
+    sweepstakes.executed = function(uuid) {
+      return sweepstakes.body.filter(function(sweepstake) {
+        return sweepstake.control.winFrom === uuid;
+      }).length;
     };
 
     load();
