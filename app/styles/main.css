@@ -33,6 +33,10 @@ table thead {
   color: #AAA;
 }
 
+.scroll-y {
+  overflow-y: auto;
+}
+
 span.btn {
   cursor: default;
 }

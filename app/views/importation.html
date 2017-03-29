@@ -39,55 +39,57 @@
 
 <hr ng-show="importation.table.body.length">
 
-<table class="table" ng-show="importation.table.body.length">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th ng-repeat="collum in importation.table.head track by $index"
-        ng-init="preserve = true">
-        <div class="input-group">
-          <input type="text"
-            class="form-control input-sm"
-            placeholder="atributo"
-            ng-model="collum"
-            ng-change="importation.table.head[$index] = collum"
-            ng-disabled="!preserve"
-            ng-model-options="{
-              updateOn: 'default blur',
-              debounce: {
-                'default': 1000,
-                'blur': 0
-              }
-            }">
-          <span class="input-group-addon">
-            <input type="checkbox"
-              ng-model="preserve"
-              ng-change="importation.toggleCollum($index)">
-          </span>
-        </div>
-      </th>
-    </tr>
-  </thead>
-  <tbody ng-init="limit = 8">
-    <tr ng-repeat="rows in importation.table.body | limitTo:limit">
-      <td><strong>{{$index+1}}</strong></td>
-      <td ng-repeat="cell in rows track by $index"
-        ng-class="{'ignored':importation.isIgnoredCollum($index)}">
-        {{::cell}}
-      </td>
-    </tr>
-    <tr ng-if="importation.table.body.length > limit">
-      <td colspan="{{importation.table.head.length+1}}">...</td>
-    </tr>
-    <tr ng-if="importation.table.body.length > limit">
-      <td><strong>{{importation.table.body.length}}</strong></td>
-      <td ng-repeat="cell in importation.table.body[importation.table.body.length-1] track by $index"
-        ng-class="{'ignored':importation.isIgnoredCollum($index)}">
-        {{::cell}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="scroll-y" ng-if="importation.table.body.length">
+  <table class="table" ng-style="{width: (importation.table.head.length > 4 && (importation.table.head.length * 200) || '100%')}">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th ng-repeat="collum in importation.table.head track by $index"
+          ng-init="preserve = true">
+          <div class="input-group">
+            <input type="text"
+              class="form-control input-sm"
+              placeholder="atributo"
+              ng-model="collum"
+              ng-change="importation.table.head[$index] = collum"
+              ng-disabled="!preserve"
+              ng-model-options="{
+                updateOn: 'default blur',
+                debounce: {
+                  'default': 1000,
+                  'blur': 0
+                }
+              }">
+            <span class="input-group-addon">
+              <input type="checkbox"
+                ng-model="preserve"
+                ng-change="importation.toggleCollum($index)">
+            </span>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody ng-init="limit = 8">
+      <tr ng-repeat="rows in importation.table.body | limitTo:limit">
+        <td><strong>{{$index+1}}</strong></td>
+        <td ng-repeat="cell in rows track by $index"
+          ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+          {{::cell}}
+        </td>
+      </tr>
+      <tr ng-if="importation.table.body.length > limit">
+        <td colspan="{{importation.table.head.length+1}}">...</td>
+      </tr>
+      <tr ng-if="importation.table.body.length > limit">
+        <td><strong>{{importation.table.body.length}}</strong></td>
+        <td ng-repeat="cell in importation.table.body[importation.table.body.length-1] track by $index"
+          ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+          {{::cell}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <hr>
 
