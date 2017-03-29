@@ -44,6 +44,7 @@ angular.module('randlistApp')
     var sweepstake = this;
 
     sweepstake.uuid = $routeParams.uuid;
+    sweepstake.register = null;
     sweepstake.winners = [];
 
     sweepstake.run = function() {
@@ -66,6 +67,8 @@ angular.module('randlistApp')
         var winner = candidates[random];
         var index = sweepstake.body.indexOf(winner);
 
+        sweepstake.register = winner.data.toString();
+
         sweepstake.body[index].control.win = true;
         sweepstake.body[index].control.winAt = new Date();
         sweepstake.body[index].control.winFrom = sweepstake.uuid;
@@ -73,6 +76,7 @@ angular.module('randlistApp')
         localStorageService.set('body', sweepstake.body);
         load();
       } else {
+        sweepstake.register = null;
         $window.alert('Não há mais candidatos disponíveis');
       }
     };

@@ -25,6 +25,9 @@
     ng-show="list.body && list.body.length > 0">
     <thead>
       <tr>
+        <th width="20">
+          #
+        </th>
         <th ng-repeat="collum in ::list.head track by $index">
           {{::collum}}
         </th>
@@ -34,7 +37,8 @@
     <tbody>
       <tr ng-repeat="row in list.body | filter:search"
         class="animate-repeat"
-        ng-class="::{'success':row.control.win}">
+        ng-class="{'success':row.control.win}">
+        <td><strong>{{::$index+1}}</strong></td>
         <td ng-repeat="cell in ::row.data track by $index">
           {{::cell}}
         </td>
@@ -53,6 +57,9 @@
         </td>
       </tr>
       <tr>
+        <td class="text-muted">
+          <strong>{{list.body.length+1}}</strong>
+        </td>
         <td ng-repeat="collum in ::list.head track by $index">
           <input type="text"
             class="form-control input-sm expression"

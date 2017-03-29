@@ -28,7 +28,7 @@
   ng-if="sweepstake.winners.length > 0">
   <thead>
     <tr>
-      <th>
+      <th width="20">
         #
       </th>
       <th ng-repeat="collum in ::sweepstake.head track by $index">
@@ -41,7 +41,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in sweepstake.winners | orderBy:'control.winAt'"
-      ng-class="::{'success': sweepstake.register == row.data}">
+      ng-class="{'success': sweepstake.register == row.data}">
       <td>
         {{::$index+1}}º
       </td>
