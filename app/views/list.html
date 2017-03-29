@@ -4,30 +4,30 @@
     ng-show="list.body && list.body.length > 0">
     <thead>
       <tr>
-        <th ng-repeat="collum in list.head track by $index">
+        <th ng-repeat="collum in ::list.head track by $index">
           {{::collum}}
         </th>
         <th width="20"></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in list.body as result"
+      <tr ng-repeat="row in list.body"
         class="animate-repeat"
         ng-class="{'success':row.control.win}">
-        <td ng-repeat="cell in row.data track by $index">
+        <td ng-repeat="cell in ::row.data track by $index">
           {{::cell}}
         </td>
         <td>
           <button type="button"
             class="btn btn-danger btn-sm"
             ng-click="list.remove(row)"
-            ng-disabled="row.control.win">
+            ng-disabled="::row.control.win">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </td>
       </tr>
       <tr>
-        <td ng-repeat="collum in list.head">
+        <td ng-repeat="collum in ::list.head track by $index">
           <input type="text"
             class="form-control input-sm expression"
             placeholder="{{::collum}}"
