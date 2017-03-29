@@ -8,7 +8,7 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('SweepstakeCtrl', function ($scope, $window, $routeParams, exportList, localStorageService) {
+  .controller('SweepstakeCtrl', function ($scope, $window, $log, $routeParams, $location, exportList, localStorageService) {
 
     function current(element) {
       return element.uuid === sweepstake.uuid;
@@ -96,6 +96,18 @@ angular.module('randlistApp')
         exportList.save(sweepstake.name  + '.csv', csv);
       }
     };
+
+    (function(data) {
+      if (data) {
+        try {
+          sweepstake.register = atob(data);
+        } catch(e) {
+          $log.info(e);
+          $window.alert('Identificador de registro inválido');
+          $location.path('/sweepstakes');
+        }
+      }
+    })($routeParams.register);
 
     load();
 

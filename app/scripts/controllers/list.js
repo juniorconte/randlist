@@ -58,6 +58,10 @@ angular.module('randlistApp')
       exportList.save('backup.randlist', base64);
     };
 
+    list.eBase64 = function(data) {
+      return btoa(data);
+    };
+
     load();
 
   });

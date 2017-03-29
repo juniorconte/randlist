@@ -32,7 +32,7 @@ angular
         controller: 'SweepstakesCtrl',
         controllerAs: 'sweepstakes'
       })
-      .when('/sweepstakes/:uuid', {
+      .when('/sweepstakes/:uuid/:register?', {
         templateUrl: 'views/sweepstake.html',
         controller: 'SweepstakeCtrl',
         controllerAs: 'sweepstake'

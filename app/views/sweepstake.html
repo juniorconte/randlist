@@ -40,7 +40,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="row in sweepstake.winners | orderBy:'control.winAt'">
+    <tr ng-repeat="row in sweepstake.winners | orderBy:'control.winAt'"
+      ng-class="::{'success': sweepstake.register == row.data}">
       <td>
         {{::$index+1}}º
       </td>

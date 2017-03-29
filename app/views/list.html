@@ -34,15 +34,20 @@
     <tbody>
       <tr ng-repeat="row in list.body | filter:search"
         class="animate-repeat"
-        ng-class="{'success':row.control.win}">
+        ng-class="::{'success':row.control.win}">
         <td ng-repeat="cell in ::row.data track by $index">
           {{::cell}}
         </td>
-        <td>
+        <td ng-switch="::row.control.win">
+          <a class="btn btn-primary btn-sm"
+            ng-switch-when="true"
+            ng-href="#/sweepstakes/{{::row.control.winFrom}}/{{::list.eBase64(row.data)}}">
+            <i class="glyphicon glyphicon-list"></i>
+          </a>
           <button type="button"
             class="btn btn-danger btn-sm"
-            ng-click="list.remove(row)"
-            ng-disabled="::row.control.win">
+            ng-switch-when="false"
+            ng-click="list.remove(row)">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </td>
