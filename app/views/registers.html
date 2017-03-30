@@ -79,16 +79,20 @@
 
   <div class="form-group"
     ng-show="registers.body && registers.body.length > 0">
-    <button type="button"
-      class="btn btn-lg btn-primary"
-      ng-click="registers.save()">
-      Gerar backup
-    </button>
-    <button type="button"
-      class="btn btn-lg btn-danger"
-      ng-click="registers.clean()"
-      ng-disabled="!registers.body || !registers.body.length">
-      Limpar tudo
-    </button>
+    <div class="pull-left">
+      <button type="button"
+        class="btn btn-lg btn-primary"
+        ng-click="registers.save()">
+        Gerar backup
+      </button>
+    </div>
+    <div class="pull-right">
+      <button type="button"
+        class="btn btn-lg btn-danger"
+        ng-click="registers.clean()"
+        ng-disabled="!registers.body || !registers.body.length">
+        Limpar tudo
+      </button>
+    </div>
   </div>
 </form>

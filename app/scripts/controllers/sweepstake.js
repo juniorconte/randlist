@@ -79,6 +79,14 @@ angular.module('randlistApp')
         sweepstake.register = null;
         $window.alert('Não há mais candidatos disponíveis');
       }
+
+      return candidates.length && candidates.length - 1 || 0;
+    };
+
+    sweepstake.runAll = function() {
+      while (sweepstake.winners.length < sweepstake.quantity) {
+        if (!sweepstake.run()) { break; }
+      }
     };
 
     sweepstake.makeWinnerList = function() {

@@ -58,22 +58,32 @@
 <hr>
 
 <div class="form-group hidden-print">
-  <button type="button"
-    class="btn btn-lg btn-primary"
-    ng-click="sweepstake.run()"
-    ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length >= sweepstake.quantity">
-    Sortear
-  </button>
-  <button type="button"
-    class="btn btn-lg btn-default"
-    ng-click="sweepstake.print()"
-    ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length == 0">
-    Imprimir
-  </button>
-  <button type="button"
-    class="btn btn-lg btn-default"
-    ng-click="sweepstake.exportCSV(sweepstake.head, sweepstake.winners);"
-    ng-disabled="!sweepstake.winners.length">
-    Exportar csv
-  </button>
+  <div class="pull-left">
+    <button type="button"
+      class="btn btn-lg btn-primary"
+      ng-click="sweepstake.run()"
+      ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length >= sweepstake.quantity">
+      Sortear um
+    </button>
+    <button type="button"
+      class="btn btn-lg btn-primary"
+      ng-click="sweepstake.runAll()"
+      ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length >= sweepstake.quantity">
+      Sortear tudo
+    </button>
+  </div>
+  <div class="pull-right">
+    <button type="button"
+      class="btn btn-lg btn-default"
+      ng-click="sweepstake.print()"
+      ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length == 0">
+      Imprimir
+    </button>
+    <button type="button"
+      class="btn btn-lg btn-default"
+      ng-click="sweepstake.exportCSV(sweepstake.head, sweepstake.winners);"
+      ng-disabled="!sweepstake.winners.length">
+      Exportar csv
+    </button>
+  </div>
 </div>
