@@ -64,14 +64,12 @@
     ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length >= sweepstake.quantity">
     Sortear
   </button>
-
   <button type="button"
     class="btn btn-lg btn-default"
     ng-click="sweepstake.print()"
     ng-disabled="sweepstake.list.length == 0 || sweepstake.winners.length == 0">
     Imprimir
   </button>
-
   <button type="button"
     class="btn btn-lg btn-default"
     ng-click="sweepstake.exportCSV(sweepstake.head, sweepstake.winners);"

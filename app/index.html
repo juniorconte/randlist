@@ -22,8 +22,8 @@
     <![endif]-->
 
     <div ng-controller="MainCtrl as main">
-      <div class="header hidden-print"
-        ng-hide="main.currentControllerAs == 'home'">
+      <div class="header soft-hidden hidden-print"
+        ng-class="{'show': main.currentControllerAs != 'home'}">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,18 +33,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" ng-href="#/">Randlist</a>
+              <a class="navbar-brand" ng-href="#/">Randlist.io</a>
             </div>
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
               <ul class="nav navbar-nav">
                 <li ng-class="{'active':main.currentControllerAs == 'importation'}">
-                  <a ng-href="#/importation">Importação</a>
+                  <a ng-href="#/importation">
+                    Importação
+                  </a>
                 </li>
-                <li ng-class="{'active':main.currentControllerAs == 'list'}">
-                  <a ng-href="#/list">Lista</a>
+                <li ng-class="{'active':main.currentControllerAs == 'registers'}">
+                  <a ng-href="#/registers">
+                    Registros
+                    <span class="badge">{{main.totalRegisters}}</span>
+                  </a>
                 </li>
                 <li ng-class="{'active':main.currentControllerAs == 'sweepstakes'}">
-                  <a ng-href="#/sweepstakes">Sorteios</a>
+                  <a ng-href="#/sweepstakes">
+                    Sorteios
+                    <span class="badge">{{main.totalSweepstakes}}</span>
+                  </a>
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -88,7 +96,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/importation.js"></script>
-    <script src="scripts/controllers/list.js"></script>
+    <script src="scripts/controllers/registers.js"></script>
     <script src="scripts/controllers/sweepstakes.js"></script>
     <script src="scripts/controllers/sweepstake.js"></script>
     <!-- endbuild -->

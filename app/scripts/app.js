@@ -27,10 +27,10 @@ angular
         controller: 'ImportationCtrl',
         controllerAs: 'importation'
       })
-      .when('/list', {
-        templateUrl: 'views/list.html',
-        controller: 'ListCtrl',
-        controllerAs: 'list'
+      .when('/registers', {
+        templateUrl: 'views/registers.html',
+        controller: 'RegistersCtrl',
+        controllerAs: 'registers'
       })
       .when('/sweepstakes', {
         templateUrl: 'views/sweepstakes.html',
@@ -49,5 +49,6 @@ angular
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('randlist')
-      .setStorageType('localStorage');
+      .setStorageType('localStorage')
+      .setNotify(true, true);
   });

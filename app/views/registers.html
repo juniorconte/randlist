@@ -20,22 +20,22 @@
 <hr>
 
 <form ng-init="newer = {}"
-  ng-submit="list.add(newer); newer = {}">
+  ng-submit="registers.add(newer); newer = {}">
   <table class="table table-striped table-hover"
-    ng-show="list.body && list.body.length > 0">
+    ng-show="registers.body && registers.body.length > 0">
     <thead>
       <tr>
         <th width="20">
           #
         </th>
-        <th ng-repeat="collum in ::list.head track by $index">
+        <th ng-repeat="collum in ::registers.head track by $index">
           {{::collum}}
         </th>
         <th width="20"></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in list.body | filter:search"
+      <tr ng-repeat="row in registers.body | filter:search"
         class="animate-repeat"
         ng-class="{'success':row.control.win}">
         <td><strong>{{::$index+1}}</strong></td>
@@ -45,22 +45,22 @@
         <td ng-switch="::row.control.win">
           <a class="btn btn-primary btn-sm"
             ng-switch-when="true"
-            ng-href="#/sweepstakes/{{::row.control.winFrom}}/{{::list.eBase64(row.data)}}">
+            ng-href="#/sweepstakes/{{::row.control.winFrom}}/{{::registers.eBase64(row.data)}}">
             <i class="glyphicon glyphicon-list"></i>
           </a>
           <button type="button"
             class="btn btn-danger btn-sm"
             ng-switch-when="false"
-            ng-click="list.remove(row)">
+            ng-click="registers.remove(row)">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </td>
       </tr>
       <tr>
         <td class="text-muted">
-          <strong>{{list.body.length+1}}</strong>
+          <strong>{{registers.body.length+1}}</strong>
         </td>
-        <td ng-repeat="collum in ::list.head track by $index">
+        <td ng-repeat="collum in ::registers.head track by $index">
           <input type="text"
             class="form-control input-sm expression"
             placeholder="{{::collum}}"
@@ -78,17 +78,17 @@
   </table>
 
   <div class="form-group"
-    ng-show="list.body && list.body.length > 0">
-    <button type="button"
-      class="btn btn-lg btn-danger"
-      ng-click="list.clean()"
-      ng-disabled="!list.body || !list.body.length">
-      Limpar lista
-    </button>
+    ng-show="registers.body && registers.body.length > 0">
     <button type="button"
       class="btn btn-lg btn-primary"
-      ng-click="list.save()">
+      ng-click="registers.save()">
       Gerar backup
+    </button>
+    <button type="button"
+      class="btn btn-lg btn-danger"
+      ng-click="registers.clean()"
+      ng-disabled="!registers.body || !registers.body.length">
+      Limpar tudo
     </button>
   </div>
 </form>

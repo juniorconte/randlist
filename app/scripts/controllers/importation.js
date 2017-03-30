@@ -49,7 +49,7 @@ angular.module('randlistApp')
         localStorageService.set('head', parsedJson.head);
         localStorageService.set('body', parsedJson.body);
         localStorageService.set('sweepstakes', parsedJson.sweepstakes);
-        $location.path('/list');
+        $location.path('/registers');
       }
     };
 
@@ -108,7 +108,7 @@ angular.module('randlistApp')
       localStorageService.set('head', head);
       localStorageService.set('body', body);
 
-      $location.path('/list');
+      $location.path('/registers');
     };
 
     $scope.$watchGroup([

@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: ListCtrl', function () {
+describe('Controller: RegistersCtrl', function () {
 
   // load the controller's module
   beforeEach(module('randlistApp'));
 
-  var ListCtrl,
+  var RegistersCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ListCtrl = $controller('ListCtrl', {
+    RegistersCtrl = $controller('RegistersCtrl', {
       $scope: scope
       // place here mocked dependencies
     });

@@ -10,6 +10,10 @@ table thead {
   text-transform: capitalize;
 }
 
+.soft-hidden {
+  display: none;
+}
+
 .fake-upload {
   position: relative;
 }
