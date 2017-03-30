@@ -56,7 +56,9 @@ angular.module('randlistApp')
     importation.makeTable = function(file, separator, firstIsHead) {
       if (!file) { return; }
 
-      var rows = file.split('\n').map(function(row) {
+      var splitLine = file.indexOf('\r') > -1 ? '\r' : '\n';
+
+      var rows = file.split(splitLine).map(function(row) {
         return row.split(separator === '\\t' ? '\t' : (separator || ' '));
       }).filter(function(row) {
         return row.some(function(collum) {
