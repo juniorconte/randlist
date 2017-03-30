@@ -30,7 +30,7 @@ angular.module('randlistApp')
     };
 
     sweepstakes.remove = function(sweepstake) {
-      if ($window.confirm('Isso apagará este registro, deseja continuar?')) {
+      if ($window.confirm('Isso apagará este sorteio, deseja continuar?')) {
         sweepstakes.list.splice(sweepstakes.list.indexOf(sweepstake), true);
         localStorageService.set('sweepstakes', sweepstakes.list);
       }

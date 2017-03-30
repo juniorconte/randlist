@@ -8,7 +8,7 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('RegistersCtrl', function ($window, localStorageService, exportList) {
+  .controller('RegistersCtrl', function ($rootScope, $window, localStorageService, exportList) {
 
     function load() {
       registers.head = localStorageService.get('head') || [];
@@ -20,6 +20,7 @@ angular.module('randlistApp')
     registers.clean = function() {
       if ($window.confirm('Isso apagará todos os dados inclusive os sorteios, deseja continuar?')) {
         localStorageService.clearAll();
+        $rootScope.$broadcast('LocalStorageModule.notification.removeitem');
         load();
       }
     };

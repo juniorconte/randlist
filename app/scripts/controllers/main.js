@@ -11,14 +11,14 @@ angular.module('randlistApp')
   .controller('MainCtrl', function ($scope, localStorageService) {
 
     function calculateTotalStorage() {
-      main.totalRegisters = localStorageService.get('body').length;
-      main.totalSweepstakes = localStorageService.get('sweepstakes').length;
+      var body = localStorageService.get('body');
+      var sweepstakes = localStorageService.get('sweepstakes');
+
+      main.totalRegisters = body && body.length || 0;
+      main.totalSweepstakes = sweepstakes && sweepstakes.length || 0;
     }
 
     var main = this;
-
-    main.totalRegisters =  0;
-    main.totalSweepstakes = 0;
 
     $scope.$on('$routeChangeStart', function(event, next) {
       main.currentControllerAs = next.controllerAs;
