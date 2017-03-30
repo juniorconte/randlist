@@ -17,6 +17,11 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/', {
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        controllerAs: 'home'
+      })
       .when('/importation', {
         templateUrl: 'views/importation.html',
         controller: 'ImportationCtrl',
@@ -38,7 +43,7 @@ angular
         controllerAs: 'sweepstake'
       })
       .otherwise({
-        redirectTo: '/sweepstakes'
+        redirectTo: '/'
       });
   })
   .config(function (localStorageServiceProvider) {

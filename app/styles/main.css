@@ -41,6 +41,34 @@ span.btn {
   cursor: default;
 }
 
+.jumbotron {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.jumbotron .lead {
+  margin-bottom: 30px;
+}
+
+.feature {
+  margin-bottom: 20px;
+}
+
+.feature .icon {
+  font-size: 36px;
+  line-height: 36px;
+  position: absolute;
+}
+
+.feature .text {
+  margin-left: 46px;
+}
+
+.feature h4 {
+  margin: 0px;
+  margin-bottom: 4px;
+}
+
 @media print {
   body {
     padding: 0;

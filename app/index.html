@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Randlist</title>
-    <meta name="description" content="">
+    <meta name="description" content="Webapp para realização de sorteios em eventos">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,7 +22,8 @@
     <![endif]-->
 
     <div ng-controller="MainCtrl as main">
-      <div class="header hidden-print">
+      <div class="header hidden-print"
+        ng-hide="main.currentControllerAs == 'home'">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -84,6 +86,7 @@
     <script src="scripts/services/exportlist.js"></script>
 
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/importation.js"></script>
     <script src="scripts/controllers/list.js"></script>
     <script src="scripts/controllers/sweepstakes.js"></script>
