@@ -52,10 +52,9 @@ angular.module('randlistApp')
         if (sweepstake.filter) {
           var sandbox = $scope.$new();
 
-          sweepstake.head.forEach(function(collum, index) {
-            sandbox[collum] = angular.copy(candidate.data[index]);
+          sweepstake.head.forEach(function(column, index) {
+            sandbox[column] = angular.copy(candidate.data[index]);
           });
-
           return !candidate.control.win && sandbox.$eval(sweepstake.filter);
         } else {
           return !candidate.control.win;

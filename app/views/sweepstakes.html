@@ -1,126 +1,162 @@
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Descrição</th>
-      <th width="110">Quantidade</th>
-      <th width="40"></th>
-      <th>
-        Filtro
-        <i class="glyphicon glyphicon-info-sign"
-          title="Valores disponíveis: {{sweepstakes.head.join(', ')}}
+<form name="sweepstakesForm" novalidate>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th width="110">Quantidade</th>
+        <th width="40"></th>
+        <th>
+          Filtro
+          <i class="glyphicon glyphicon-info-sign"
+            title="Valores disponíveis: {{sweepstakes.head.join(', ')}}
 
-Ex: {{sweepstakes.head[0]}} != 'alguma coisa'
+  Ex: {{sweepstakes.head[0]}} != 'alguma coisa'
 
-É possível utilizar todos os operadores logícos, bem como métodos nativos do prototype.">
-        </i>
-      </th>
-      <th width="90"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="sweepstake in sweepstakes.list"
-      ng-init="executed = sweepstakes.executed(sweepstake.uuid)">
-      <td>
-        <input type="text"
-          class="form-control input-sm expression"
-          placeholder="O que será sorteado?"
-          ng-model="sweepstake.name"
-          ng-change="sweepstakes.save(sweepstake)"
-          ng-model-options="{
-            updateOn: 'default blur',
-            debounce: {
-              'default': 1000,
-              'blur': 0
-            }
-          }">
-      </td>
-      <td>
-        <input type="number"
-          class="form-control input-sm expression"
-          placeholder="Quantos?"
-          min="1"
-          ng-model="sweepstake.quantity"
-          ng-change="sweepstakes.save(sweepstake)"
-          ng-model-options="{
-            updateOn: 'default blur',
-            debounce: {
-              'default': 1000,
-              'blur': 0
-            }
-          }">
-      </td>
-      <td>
-        <span class="btn btn-success btn-block btn-sm"
-          ng-class="{
-            'btn-success': (executed < sweepstake.quantity),
-            'btn-warning': (executed == sweepstake.quantity),
-            'btn-danger': (executed > sweepstake.quantity)
-          }">
-          {{executed}}
-        </span>
-      </td>
-      <td>
-        <input type="text"
-          class="form-control input-sm expression"
-          placeholder="Utilize JS se quiser filtrar :)"
-          ng-model="sweepstake.filter"
-          ng-change="sweepstakes.save(sweepstake)"
-          ng-model-options="{
-            updateOn: 'default blur',
-            debounce: {
-              'default': 1000,
-              'blur': 0
-            }
-          }">
-      </td>
-      <td>
-        <a class="btn btn-primary btn-sm"
-          ng-href="#/sweepstakes/{{sweepstake.uuid}}">
-          <i class="glyphicon glyphicon-list"></i>
-        </a>
-        <button type="button"
-          class="btn btn-danger btn-sm"
-          ng-click="sweepstakes.remove(sweepstake)"
-          ng-disabled="executed">
-          <i class="glyphicon glyphicon-remove"></i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="text"
-          class="form-control input-sm expression"
-          placeholder="O que será sorteado?"
-          ng-model="name">
-      </td>
-      <td>
-        <input type="number"
-          class="form-control input-sm expression"
-          placeholder="Quantos?"
-          ng-model="quantity">
-      </td>
-      <td>
-        <span class="btn btn-default btn-block btn-sm">0</span>
-      </td>
-      <td>
-        <input type="text"
-          class="form-control input-sm expression"
-          placeholder="Utilize JS se quiser filtrar :)"
-          ng-model="filter">
-      </td>
-      <td>
-        <button type="button"
-          class="btn btn-success btn-sm"
-          ng-click="sweepstakes.add(name, quantity, filter);
-            name = quantity = filter = null">
-          <i class="glyphicon glyphicon-ok"></i>
-        </button>
-        <button type="button"
-          class="btn btn-danger btn-sm"
-          disabled>
-          <i class="glyphicon glyphicon-remove"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  É possível utilizar todos os operadores logícos, bem como métodos nativos do prototype.">
+          </i>
+        </th>
+        <th width="90"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="sweepstake in sweepstakes.list"
+        ng-init="executed = sweepstakes.executed(sweepstake.uuid)">
+        <td>
+          <input type="text"
+            class="form-control input-sm expression"
+            placeholder="O que será sorteado?"
+            ng-model="sweepstake.name"
+            ng-change="sweepstakes.save(sweepstake)"
+            ng-model-options="{
+              updateOn: 'default blur',
+              debounce: {
+                'default': 1000,
+                'blur': 0
+              }
+            }">
+        </td>
+        <td>
+          <input type="number"
+            class="form-control input-sm expression"
+            placeholder="Quantos?"
+            min="1"
+            ng-model="sweepstake.quantity"
+            ng-change="sweepstakes.save(sweepstake)"
+            ng-model-options="{
+              updateOn: 'default blur',
+              debounce: {
+                'default': 1000,
+                'blur': 0
+              }
+            }">
+        </td>
+        <td>
+          <span class="btn btn-success btn-block btn-sm"
+            ng-class="{
+              'btn-success': (executed < sweepstake.quantity),
+              'btn-warning': (executed == sweepstake.quantity),
+              'btn-danger': (executed > sweepstake.quantity)
+            }">
+            {{executed}}
+          </span>
+        </td>
+        <td>
+          <input type="text"
+            class="form-control input-sm expression"
+            placeholder="Utilize JS se quiser filtrar :)"
+            ng-model="sweepstake.filter"
+            ng-change="sweepstakes.save(sweepstake)"
+            ng-model-options="{
+              updateOn: 'default blur',
+              debounce: {
+                'default': 1000,
+                'blur': 0
+              }
+            }">
+        </td>
+        <td>
+          <a class="btn btn-primary btn-sm"
+            ng-href="#/sweepstakes/{{sweepstake.uuid}}">
+            <i class="glyphicon glyphicon-list"></i>
+          </a>
+          <button type="button"
+            class="btn btn-danger btn-sm"
+            ng-click="sweepstakes.remove(sweepstake)"
+            ng-disabled="executed">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form-group" ng-class="{'has-error': sweepstakesForm.name.$invalid && sweepstakesForm.name.$dirty}">
+            <input type="text"
+              class="form-control input-sm expression"
+              name="name"
+              placeholder="O que será sorteado?"
+              ng-model="name"
+              required>
+          </div>
+        </td>
+        <td>
+          <div class="form-group" ng-class="{'has-error': sweepstakesForm.quantity.$invalid && sweepstakesForm.quantity.$dirty}">
+            <input type="number"
+              class="form-control input-sm expression"
+              name="quantity"
+              placeholder="Quantos?"
+              ng-model="quantity"
+              required>
+          </div>
+        </td>
+        <td>
+          <span class="btn btn-default btn-block btn-sm">0</span>
+        </td>
+        <td>
+          <input type="text"
+            class="form-control input-sm expression"
+            placeholder="Utilize JS se quiser filtrar :)"
+            ng-model="filter">
+        </td>
+        <td>
+          <button type="button"
+            class="btn btn-success btn-sm"
+            ng-disabled="sweepstakesForm.$invalid"
+            ng-click="sweepstakes.add(name, quantity, filter);
+              name = quantity = filter = null">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button"
+            class="btn btn-danger btn-sm"
+            disabled>
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<h3 class="page-header" ng-show="sweepstakes.filter.length > 0">
+  Visualização do filtro
+</h3>
+<div ng-show="sweepstakes.candidates.length === 0 && sweepstakes.filter.length > 0" class="alert alert-warning">
+  <p>Nenhum candidato encontrado com o filtro (<strong>{{sweepstakes.filter}}</strong>) :/</p>
+</div>
+<div ng-show="sweepstakes.candidates.length > 0">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th ng-repeat="head in sweepstakes.head">
+          {{::head}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="candidate in sweepstakes.candidates">
+        <td ng-repeat="prop in candidate.data">
+          {{::prop}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -61,8 +61,8 @@ angular.module('randlistApp')
       var rows = file.split(splitLine).map(function(row) {
         return row.split(separator === '\\t' ? '\t' : (separator || ' '));
       }).filter(function(row) {
-        return row.some(function(collum) {
-          return !!collum;
+        return row.some(function(column) {
+          return !!column;
         });
       });
 
@@ -75,7 +75,7 @@ angular.module('randlistApp')
       importation.table.body = rows;
     };
 
-    importation.toggleCollum = function(position) {
+    importation.toggleColumn = function(position) {
       var index = importation.ignored.indexOf(position);
 
       if (index > -1) {
@@ -85,7 +85,7 @@ angular.module('randlistApp')
       }
     };
 
-    importation.isIgnoredCollum = function(position) {
+    importation.isIgnoredColumn = function(position) {
       return importation.ignored.indexOf(position) > -1;
     };
 
@@ -103,7 +103,7 @@ angular.module('randlistApp')
         };
       });
 
-      var head = table.head.filter(function(collum, index) {
+      var head = table.head.filter(function(column, index) {
         return ignored.indexOf(index) === -1;
       }).map(cleanString);
 

@@ -74,14 +74,14 @@
         <th width="20">
           #
         </th>
-        <th ng-repeat="collum in importation.table.head track by $index"
+        <th ng-repeat="column in importation.table.head track by $index"
           ng-init="preserve = true">
           <div class="input-group">
             <input type="text"
               class="form-control input-sm"
               placeholder="atributo"
-              ng-model="collum"
-              ng-change="importation.table.head[$index] = collum"
+              ng-model="column"
+              ng-change="importation.table.head[$index] = column"
               ng-disabled="!preserve"
               ng-model-options="{
                 updateOn: 'default blur',
@@ -93,7 +93,7 @@
             <span class="input-group-addon">
               <input type="checkbox"
                 ng-model="preserve"
-                ng-change="importation.toggleCollum($index)">
+                ng-change="importation.toggleColumn($index)">
             </span>
           </div>
         </th>
@@ -105,7 +105,7 @@
           <strong>{{::$index+1}}</strong>
         </td>
         <td ng-repeat="cell in rows track by $index"
-          ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+          ng-class="{'ignored':importation.isIgnoredColumn($index)}">
           {{::cell}}
         </td>
       </tr>
@@ -119,7 +119,7 @@
           <strong>{{importation.table.body.length}}</strong>
         </td>
         <td ng-repeat="cell in importation.table.body[importation.table.body.length-1] track by $index"
-          ng-class="{'ignored':importation.isIgnoredCollum($index)}">
+          ng-class="{'ignored':importation.isIgnoredColumn($index)}">
           {{::cell}}
         </td>
       </tr>
