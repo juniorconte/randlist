@@ -27,12 +27,38 @@ angular.module('randlistApp')
       });
 
       localStorageService.set('sweepstakes', sweepstakes.list);
+
+      preview(filter);
+    };
+
+    var preview = function(filter) {
+      if (filter.length > 0) {
+        sweepstakes.filter = filter
+        var candidates = sweepstakes.body.filter(function(candidate) {
+          if (filter) {
+            var sandbox = $scope.$new();
+
+            sweepstakes.head.forEach(function(column, index) {
+              sandbox[column] = angular.copy(candidate.data[index]);
+            });
+            return !candidate.control.win && sandbox.$eval(filter);
+          } else {
+            return !candidate.control.win;
+          }
+        });
+        sweepstakes.candidates = candidates;
+      } else {
+        sweepstakes.filter = '';
+        sweepstakes.candidates = [];
+      }
     };
 
     sweepstakes.remove = function(sweepstake) {
       if ($window.confirm('Isso apagará este sorteio, deseja continuar?')) {
         sweepstakes.list.splice(sweepstakes.list.indexOf(sweepstake), true);
         localStorageService.set('sweepstakes', sweepstakes.list);
+        sweepstakes.filter = '';
+        sweepstakes.candidates = [];
       }
     };
 
@@ -41,6 +67,8 @@ angular.module('randlistApp')
       sweepstakes.list[index] = sweepstake;
 
       localStorageService.set('sweepstakes', sweepstakes.list);
+
+      preview(sweepstake.filter);
     };
 
     sweepstakes.executed = function(uuid) {
