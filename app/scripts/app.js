@@ -13,6 +13,7 @@ angular
     'ngRoute',
     'ngAnimate',
     'ngFileSaver',
+    'ui.bootstrap',
     'LocalStorageModule'
   ])
   .config(function ($routeProvider) {

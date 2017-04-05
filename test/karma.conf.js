@@ -30,6 +30,7 @@ module.exports = function(config) {
       'bower_components/blob-polyfill/Blob.js',
       'bower_components/file-saver.js/FileSaver.js',
       'bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
