@@ -15,6 +15,10 @@ table thead {
   display: none;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 .fake-upload {
   position: relative;
 }
@@ -72,6 +76,13 @@ span.btn {
 .feature h4 {
   margin: 0px;
   margin-bottom: 4px;
+}
+
+.input-group .badge.filter-quantity {
+  position: absolute;
+  z-index: 3;
+  right: 40px;
+  top: 6px;
 }
 
 @media print {

@@ -8,7 +8,7 @@
  * Controller of the randlistApp
  */
 angular.module('randlistApp')
-  .controller('SweepstakesCtrl', function ($scope, $window, localStorageService, uuid) {
+  .controller('SweepstakesCtrl', function ($scope, $window, $uibModal, localStorageService, uuid) {
 
     function load() {
       sweepstakes.head = localStorageService.get('head') || [];
@@ -27,30 +27,59 @@ angular.module('randlistApp')
       });
 
       localStorageService.set('sweepstakes', sweepstakes.list);
-
-      preview(filter);
     };
 
-    var preview = function(filter) {
-      if (filter.length > 0) {
-        sweepstakes.filter = filter
-        var candidates = sweepstakes.body.filter(function(candidate) {
-          if (filter) {
-            var sandbox = $scope.$new();
+    sweepstakes.validateFilter = function(expression) {
+      var sandbox = $scope.$new();
 
-            sweepstakes.head.forEach(function(column, index) {
-              sandbox[column] = angular.copy(candidate.data[index]);
-            });
-            return !candidate.control.win && sandbox.$eval(filter);
-          } else {
-            return !candidate.control.win;
-          }
-        });
-        sweepstakes.candidates = candidates;
-      } else {
-        sweepstakes.filter = '';
-        sweepstakes.candidates = [];
+      sweepstakes.head.forEach(function(column, index) {
+        sandbox[column] = angular.copy(sweepstakes.body[0].data[index]);
+      });
+
+      try {
+        sandbox.$eval(expression);
+
+        return {
+          valid: true,
+          error: null
+        };
+      } catch (err) {
+        return {
+          valid: false,
+          error: err.name + ': ' + err.message.split('\n')[0]
+        };
       }
+    };
+
+    sweepstakes.resultFilter = function(expression) {
+      return sweepstakes.body.filter(function(candidate) {
+
+        var sandbox = $scope.$new();
+
+        sweepstakes.head.forEach(function(column, index) {
+          sandbox[column] = angular.copy(candidate.data[index]);
+        });
+
+        try {
+          return sandbox.$eval(expression);
+        } catch(err) {
+          return false;
+        }
+      });
+    };
+
+    sweepstakes.openFilter = function(expression) {
+      var table = $scope.$new();
+
+      table.filter = expression;
+      table.head = sweepstakes.head;
+      table.body = sweepstakes.resultFilter(expression);
+
+      $uibModal.open({
+        templateUrl: 'resultFilter.html',
+        size: 'lg',
+        scope: table
+      });
     };
 
     sweepstakes.remove = function(sweepstake) {
@@ -65,10 +94,7 @@ angular.module('randlistApp')
     sweepstakes.save = function(sweepstake) {
       var index = sweepstakes.list.indexOf(sweepstake);
       sweepstakes.list[index] = sweepstake;
-
       localStorageService.set('sweepstakes', sweepstakes.list);
-
-      preview(sweepstake.filter);
     };
 
     sweepstakes.executed = function(uuid) {
