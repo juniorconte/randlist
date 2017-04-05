@@ -30,6 +30,13 @@ angular.module('randlistApp')
     };
 
     sweepstakes.validateFilter = function(expression) {
+      if (!expression) {
+        return {
+          valid: true,
+          error: null
+        };
+      }
+
       var sandbox = $scope.$new();
 
       sweepstakes.head.forEach(function(column, index) {
@@ -53,6 +60,7 @@ angular.module('randlistApp')
 
     sweepstakes.resultFilter = function(expression) {
       return sweepstakes.body.filter(function(candidate) {
+        if (!expression) return true;
 
         var sandbox = $scope.$new();
 

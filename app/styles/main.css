@@ -85,6 +85,10 @@ span.btn {
   top: 6px;
 }
 
+.input-group input.expression {
+  padding-right: 35px;
+}
+
 @media print {
   body {
     padding: 0;
