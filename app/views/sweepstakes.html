@@ -4,13 +4,15 @@
       <th>Descrição</th>
       <th width="110">Quantidade</th>
       <th width="40"></th>
-      <th>
+      <th colspan="2">
         Filtro
-        <i class="glyphicon glyphicon-info-sign"
-          uib-tooltip="{{sweepstakes.head.join(', ')}}">
-        </i>
+        <button type="button"
+          class="btn btn-info btn-xs pull-right"
+          ng-click="sweepstakes.openHelpFilter()">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          Veja exemplos de como confgurar os filtros
+        </button>
       </th>
-      <th width="90"></th>
     </tr>
   </thead>
   <tbody>
@@ -63,7 +65,7 @@
           popover-trigger="'none'">
           <input type="text"
             class="form-control expression"
-            placeholder="Utilize JS se quiser filtrar :)"
+            placeholder="Escreva o filtro utilizando JavaScript"
             ng-model="sweepstake.filter"
             ng-change="sweepstakes.save(sweepstake)"
             ng-model-options="{
@@ -85,7 +87,7 @@
           </span>
         </div>
       </td>
-      <td>
+      <td width="90">
         <a class="btn btn-primary btn-sm"
           ng-href="#/sweepstakes/{{sweepstake.uuid}}">
           <i class="glyphicon glyphicon-list"></i>
@@ -123,7 +125,7 @@
           popover-trigger="'none'">
           <input type="text"
             class="form-control input-sm expression"
-            placeholder="Utilize JS se quiser filtrar :)"
+            placeholder="Escreva o filtro utilizando JavaScript"
             ng-model="filter">
           <span class="badge filter-quantity">
             {{sweepstakes.resultFilter(filter).length}}
@@ -137,7 +139,7 @@
           </span>
         </div>
       </td>
-      <td>
+      <td width="90">
         <button type="button"
           class="btn btn-success btn-sm"
           ng-disabled="sweepstakesForm.$invalid"
@@ -200,5 +202,54 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</script>
+
+<script type="text/ng-template" id="helpFilter.html">
+  <div class="modal-header">
+    <button type="button"
+      class="close"
+      ng-click="$close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="modal-title">Filtros JavaScript</h3>
+  </div>
+  <div class="modal-body">
+    <p class="lead">São trechos de código também conhecidos como expressões, que quando executados devem retornar um valor considerado verdadeiro.</p>
+
+    <legend>Quais atributos estão disponíveis?</legend>
+    <p>Todos os atributos do candidato
+    <kbd ng-repeat="attr in ::attrs track by $index" ng-show="attr">{{attr}}</kbd>
+    podem ser utilizados como variáveis para verificar a validade de um registro mediante o filtro aplicado.<p>
+
+    <legend>Quais operadores estão disponíveis?</legend>
+    <p>É possível utilizar qualquer operador ou método JavaScript válido, deste operadores matemáticos e condicionais até métodos do prototype. Tenha em mente que o resultado da execução do código deve retornar um valor considerado verdadeiro para que o registro seja filtrado.</p>
+
+    <legend>Exemplos:</legend>
+
+    <p>
+      {{attrs[0]}} deve ser verdadeiro<br>
+      <input type="text"
+        class="form-control expression"
+        value="!!{{attrs[0]}}"
+        readonly>
+    </p>
+
+    <p>
+      {{attrs[1] || attrs[0]}} deve ser igual a Jhon<br>
+      <input type="text"
+        class="form-control expression"
+        value="{{attrs[1] || attrs[0]}}.toLower() == 'jhon'"
+        readonly>
+    </p>
+
+    <p>
+      {{attrs[2] || attrs[1] || attrs[0]}} deve estar preenchido e {{attrs[0]}} deve ser maior que 10 ou {{attrs[1] || attrs[0]}} igual a Azul<br>
+      <input type="text"
+        class="form-control expression"
+        value="({{attrs[2] || attrs[1] || attrs[0]}} != '' && {{attrs[0]}} > 10) || {{attrs[1] || attrs[0]}} == 'Azul'"
+        readonly>
+    </p>
+
   </div>
 </script>

@@ -89,6 +89,10 @@ span.btn {
   padding-right: 35px;
 }
 
+kbd {
+  margin-right: 3px;
+}
+
 @media print {
   body {
     padding: 0;

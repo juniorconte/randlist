@@ -90,6 +90,18 @@ angular.module('randlistApp')
       });
     };
 
+    sweepstakes.openHelpFilter = function() {
+      var content = $scope.$new();
+
+      content.attrs = sweepstakes.head;
+
+      $uibModal.open({
+        templateUrl: 'helpFilter.html',
+        size: 'lg',
+        scope: content
+      });
+    };
+
     sweepstakes.remove = function(sweepstake) {
       if ($window.confirm('Isso apagará este sorteio, deseja continuar?')) {
         sweepstakes.list.splice(sweepstakes.list.indexOf(sweepstake), true);
