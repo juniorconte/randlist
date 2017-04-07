@@ -11,7 +11,9 @@ angular.module('randlistApp')
   .controller('ImportationCtrl', function ($scope, $location, localStorageService) {
 
     function cleanString(string) {
-      return string.trim().replace('\r', '');
+      return string ?
+        string.trim().replace('\r','').replace('\n','') :
+        string;
     }
 
     function identifySeparator(csv) {
