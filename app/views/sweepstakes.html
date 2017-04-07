@@ -223,7 +223,7 @@
     podem ser utilizados como variáveis para verificar a validade de um registro mediante o filtro aplicado.<p>
 
     <legend>Quais operadores estão disponíveis?</legend>
-    <p>É possível utilizar qualquer operador ou método JavaScript válido, deste operadores matemáticos e condicionais até métodos do prototype. Tenha em mente que o resultado da execução do código deve retornar um valor considerado verdadeiro para que o registro seja filtrado.</p>
+    <p>É possível utilizar qualquer operador ou método JavaScript, desde operadores matemáticos e condicionais até métodos nativos do prototype do tipo de dao. Tenha em mente que o resultado da execução do código deve retornar um valor considerado verdadeiro para que o registro seja filtrado.</p>
 
     <legend>Exemplos:</legend>
 
@@ -236,10 +236,10 @@
     </p>
 
     <p>
-      {{attrs[1] || attrs[0]}} deve ser igual a Jhon<br>
+      {{attrs[1] || attrs[0]}} deve conter o termo "primeiro lote"<br>
       <input type="text"
         class="form-control expression"
-        value="{{attrs[1] || attrs[0]}}.toLower() == 'jhon'"
+        value="{{attrs[1] || attrs[0]}}.indexOf('primeiro lote') > -1"
         readonly>
     </p>
 
