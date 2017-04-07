@@ -60,7 +60,7 @@ angular.module('randlistApp')
 
     sweepstakes.resultFilter = function(expression) {
       return sweepstakes.body.filter(function(candidate) {
-        if (!expression) return true;
+        if (!expression) { return true; }
 
         var sandbox = $scope.$new();
 
