@@ -100,6 +100,16 @@ angular.module('randlistApp')
       });
     };
 
+    sweepstake.abort = function(winner) {
+      if ($window.confirm('Isso anulará este sorteado, deseja continuar?')) {
+        winner.control.win = false;
+        winner.control.winAt = null;
+        winner.control.winFrom = null;
+        localStorageService.set('body', sweepstake.body);
+        load();
+      }
+    };
+
     sweepstake.print = function() {
       $window.print();
     };

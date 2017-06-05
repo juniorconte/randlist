@@ -37,6 +37,7 @@
       <th>
         Sorteio
       </th>
+      <th width="45"></th>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +51,13 @@
       </td>
       <td>
         {{::row.control.winAt | date:'short'}}
+      </td>
+      <td>
+        <button type="button"
+          class="btn btn-warning btn-sm"
+          ng-click="sweepstake.abort(row)">
+          <i class="glyphicon glyphicon-ban-circle"></i>
+        </button>
       </td>
     </tr>
   </tbody>
