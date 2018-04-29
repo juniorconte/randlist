@@ -2,7 +2,7 @@
 
 Webapp para realização de sorteios com listas, filtros e blacklist
 
-**[Versão de produção (randlist.com)](https://randlist.com)**
+**[Versão de produção (randlist.io)](https://randlist.io)**
 
 **[Versão de desenvolvimento (randlist.aerobatic.io)](https://randlist.aerobatic.io)**
 
